@@ -14,31 +14,27 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.mercure.app.databinding.FragmentRemoteBinding;
 
-public class RemoteFragment extends Fragment {
+public class RemoteFragment extends Fragment
+{
 
     private RemoteViewModel remoteViewModel;
     private FragmentRemoteBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+                             ViewGroup container, Bundle savedInstanceState)
+    {
         remoteViewModel =
                 new ViewModelProvider(this).get(RemoteViewModel.class);
 
         binding = FragmentRemoteBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textDashboard;
-        remoteViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
         return root;
     }
 
     @Override
-    public void onDestroyView() {
+    public void onDestroyView()
+    {
         super.onDestroyView();
         binding = null;
     }

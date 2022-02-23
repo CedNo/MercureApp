@@ -10,7 +10,7 @@ public class RemoteViewModel extends ViewModel {
 
     public RemoteViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is dashboard fragment");
+        mText.setValue("This is the remote fragment");
     }
 
     public LiveData<String> getText() {

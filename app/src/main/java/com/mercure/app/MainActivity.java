@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
 
     MqttAndroidClient client;
 
+    static String address;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,9 +54,10 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
+        address = "tcp://192.168.0.27:188";
+
         String clientId = MqttClient.generateClientId();
-        //client = new MqttAndroidClient(this.getApplicationContext(), "tcp://broker.mqttdashboard.com:1883",clientId);
-        client = new MqttAndroidClient(this.getApplicationContext(), "tcp://192.168.0.27:1883",clientId);
+        client = new MqttAndroidClient(this.getApplicationContext(), address, clientId);
 
         try {
             IMqttToken token = client.connect();
@@ -63,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onSuccess(IMqttToken asyncActionToken) {
                     Log.d("[SUCCES]", "CONNECTED");
                     Toast.makeText(MainActivity.this,"CONNECTER",Toast.LENGTH_LONG).show();
+                    findViewById(R.id.frameConnecting).setVisibility(View.GONE);
                     setSubscription();
                 }
 
@@ -70,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
                     Log.d("[FAILURE]", "CONNECTION FAILED");
                     Toast.makeText(MainActivity.this,"CONNECTION ECHOUER",Toast.LENGTH_LONG).show();
+                    findViewById(R.id.frameConnecting).setVisibility(View.GONE);
+                    findViewById(R.id.frameConnectionFailed).setVisibility(View.VISIBLE);
                 }
             });
         } catch (MqttException e) {

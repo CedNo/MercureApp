@@ -31,6 +31,8 @@ import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
+import java.util.Arrays;
+
 import pl.pawelkleczkowski.customgauge.CustomGauge;
 
 public class MainActivity extends AppCompatActivity {
@@ -64,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
 
         isConnected = false;
-        address = "tcp://192.168.0.27:1883";
+        address = "tcp://172.16.207.54:1883";
 
         clientId = MqttClient.generateClientId();
 
@@ -84,26 +86,27 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void messageArrived(String topic, MqttMessage message) throws Exception {
-                int m = Integer.parseInt(new String(message.getPayload()));
-                Log.d("[MESSAGE]", m + "");
+                Log.d("[MESSAGE]", new String(message.getPayload()));
+                String m = new String(message.getPayload());
+
 
 //              TODO FIX THE SETTING OF VALUES
                 switch (topic) {
                     case "speed": {
                         String txt = m + " m/s";
-                        ((CustomGauge) findViewById(R.id.displaySpeed)).setValue(m);
+                        ((CustomGauge) findViewById(R.id.displaySpeed)).setValue(Integer.parseInt(m));
                         ((TextView) findViewById(R.id.tvSpeed)).setText(txt);
                         break;
                     }
                     case "angleY": {
                         String txt = m + "°";
-                        ((CustomGauge) findViewById(R.id.displayAngleFace)).setValue(m);
+                        ((CustomGauge) findViewById(R.id.displayAngleFace)).setValue(Integer.parseInt(m));
                         ((TextView) findViewById(R.id.tvAngleFace)).setText(txt);
                         break;
                     }
                     case "angleX": {
                         String txt = m + "°";
-                        ((CustomGauge) findViewById(R.id.displayAngleLateral)).setValue(m);
+                        ((CustomGauge) findViewById(R.id.displayAngleLateral)).setValue(Integer.parseInt(m));
                         ((TextView) findViewById(R.id.tvAngleLateral)).setText(txt);
                         break;
                     }

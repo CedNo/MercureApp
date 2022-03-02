@@ -12,15 +12,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.mercure.app.MainActivity;
 import com.mercure.app.R;
 import com.mercure.app.databinding.FragmentHomeBinding;
 
-import java.util.Objects;
+import pl.pawelkleczkowski.customgauge.CustomGauge;
 
 public class HomeFragment extends Fragment {
 
@@ -33,6 +31,11 @@ public class HomeFragment extends Fragment {
     ConstraintLayout frameConnectionFailed;
 
     ImageView btHomeRefreshConnection;
+
+    CustomGauge displaySpeed;
+    TextView tvSpeed;
+    CustomGauge displayAngleFace;
+    CustomGauge displayAngleLateral;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -58,6 +61,13 @@ public class HomeFragment extends Fragment {
         frameConnecting = view.findViewById(R.id.frameConnecting);
         frameConnectionFailed = view.findViewById(R.id.frameConnectionFailed);
         btHomeRefreshConnection = view.findViewById(R.id.btHomeRefreshConnection);
+        displaySpeed = view.findViewById(R.id.displaySpeed);
+        displayAngleFace = view.findViewById(R.id.displayAngleFace);
+        displayAngleLateral = view.findViewById(R.id.displayAngleLateral);
+        tvSpeed = view.findViewById(R.id.tvSpeed);
+
+        displayAngleFace.setValue(90);
+        displayAngleLateral.setValue(90);
 
         btHomeRefreshConnection.setOnClickListener(this::refreshConnection);
 
@@ -66,6 +76,7 @@ public class HomeFragment extends Fragment {
             frameConnectionFailed.setVisibility(View.GONE);
         }
         else {
+            refreshConnection(view);
             frameConnecting.setVisibility(View.VISIBLE);
         }
     }
@@ -78,5 +89,14 @@ public class HomeFragment extends Fragment {
 
     public void refreshConnection(View view) {
         ((MainActivity)getActivity()).connect();
+    }
+
+    public void setSpeed(int value) {
+        String txt = value + " m/s";
+
+        if(value >= 0 && value <= 20) {
+            displaySpeed.setValue(value);
+            tvSpeed.setText(txt);
+        }
     }
 }

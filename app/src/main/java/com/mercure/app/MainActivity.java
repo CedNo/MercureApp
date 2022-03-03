@@ -88,25 +88,31 @@ public class MainActivity extends AppCompatActivity {
             public void messageArrived(String topic, MqttMessage message) throws Exception {
                 Log.d("[MESSAGE]", new String(message.getPayload()));
                 String m = new String(message.getPayload());
+                double d = Double.parseDouble(m);
 
 
 //              TODO FIX THE SETTING OF VALUES
                 switch (topic) {
                     case "speed": {
-                        String txt = m + " m/s";
-                        ((CustomGauge) findViewById(R.id.displaySpeed)).setValue(Integer.parseInt(m));
+                        int i = (int) Math.abs(d);
+                        String txt = i + " m/s";
+                        ((CustomGauge) findViewById(R.id.displaySpeed)).setValue(i);
                         ((TextView) findViewById(R.id.tvSpeed)).setText(txt);
                         break;
                     }
                     case "angleY": {
-                        String txt = m + "°";
-                        ((CustomGauge) findViewById(R.id.displayAngleFace)).setValue(Integer.parseInt(m));
+                        int y = (int) (d * 90);
+                        Log.d("[ANGLE Y]", Math.abs(y) + "");
+                        String txt = Math.abs(y) + "°";
+                        ((CustomGauge) findViewById(R.id.displayAngleFace)).setValue(y);
                         ((TextView) findViewById(R.id.tvAngleFace)).setText(txt);
                         break;
                     }
                     case "angleX": {
-                        String txt = m + "°";
-                        ((CustomGauge) findViewById(R.id.displayAngleLateral)).setValue(Integer.parseInt(m));
+                        int x = (int) (d * 90);
+                        Log.d("[ANGLE Y]", Math.abs(x) + "");
+                        String txt = Math.abs(x) + "°";
+                        ((CustomGauge) findViewById(R.id.displayAngleLateral)).setValue(x);
                         ((TextView) findViewById(R.id.tvAngleLateral)).setText(txt);
                         break;
                     }

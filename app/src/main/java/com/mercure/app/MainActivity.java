@@ -3,6 +3,7 @@ package com.mercure.app;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -38,6 +39,8 @@ import pl.pawelkleczkowski.customgauge.CustomGauge;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static ConstraintLayout frameConnecting;
+    public static ConstraintLayout frameConnectionFailed;
     private ActivityMainBinding binding;
     Context context;
 
@@ -67,7 +70,10 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
 
         isConnected = false;
-        address = "tcp://172.16.207.54:1883";
+
+        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        String defaultValue = "tcp://172.16.207.54:1883";
+        address = sharedPref.getString("adresseMQTT", defaultValue);
 
         clientId = MqttClient.generateClientId();
 
@@ -82,42 +88,39 @@ public class MainActivity extends AppCompatActivity {
         client.setCallback(new MqttCallback() {
             @Override
             public void connectionLost(Throwable cause) {
-                findViewById(R.id.frameConnectionFailed).setVisibility(View.VISIBLE);
+                frameConnectionFailed.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void messageArrived(String topic, MqttMessage message) throws Exception {
-//                Log.d("[MESSAGE]", new String(message.getPayload()));
-                String m = new String(message.getPayload());
-                double d = Double.parseDouble(m);
-
+                Log.d("[MESSAGE]", new String(message.getPayload()));
 
 //              TODO FIX THE SETTING OF VALUES
                 switch (topic) {
-                    case "speed": {
-                        int i = (int) Math.abs(d);
+                    case "accel": {
+                        String[] m = new String(message.getPayload()).split("@", 4);
+                        double d0 = Double.parseDouble(m[0]);
+                        int i = (int) Math.abs(d0);
                         Log.d("[VITESSE]", Math.abs(i) + "");
-                        String txt = i + " m/s";
+                        String txt0 = i + " m/s";
                         ((CustomGauge) findViewById(R.id.displaySpeed)).setValue(i);
-                        ((TextView) findViewById(R.id.tvSpeed)).setText(txt);
-                        break;
-                    }
-                    case "angleY": {
-                        int y = (int) (d * 90);
+                        ((TextView) findViewById(R.id.tvSpeed)).setText(txt0);
+
+                        double d1 = Double.parseDouble(m[1]);
+                        int y = (int) (d1* 90);
                         Log.d("[ANGLE Y]", Math.abs(y) + "");
-                        String txt = Math.abs(y) + "°";
+                        String txt1 = Math.abs(y) + "°";
                         ((CustomGauge) findViewById(R.id.displayAngleFace)).setValue(y);
-                        ((TextView) findViewById(R.id.tvAngleFace)).setText(txt);
-                        ((ImageView) findViewById(R.id.imgJeepStats)).setRotation(y);
-                        break;
-                    }
-                    case "angleX": {
-                        int x = (int) (d * 90);
+                        ((TextView) findViewById(R.id.tvAngleFace)).setText(txt1);
+                        ((ImageView) findViewById(R.id.imgJeepStats)).setRotationX(-y);
+
+                        double d2 = Double.parseDouble(m[2]);
+                        int x = (int) (d2 * 90);
                         Log.d("[ANGLE X]", Math.abs(x) + "");
-                        String txt = Math.abs(x) + "°";
+                        String txt2 = Math.abs(x) + "°";
                         ((CustomGauge) findViewById(R.id.displayAngleLateral)).setValue(x);
-                        ((TextView) findViewById(R.id.tvAngleLateral)).setText(txt);
-                        ((ImageView) findViewById(R.id.imgJeepStats)).setRotationX(x);
+                        ((TextView) findViewById(R.id.tvAngleLateral)).setText(txt2);
+                        ((ImageView) findViewById(R.id.imgJeepStats)).setRotation(x);
                         break;
                     }
                 }
@@ -143,9 +146,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setSubscription(){
         try{
-            client.subscribe("speed",0);
-            client.subscribe("angleY",0);
-            client.subscribe("angleX",0);
+            client.subscribe("accel",0);
         }catch (MqttException e){
             e.printStackTrace();
         }
@@ -161,8 +162,8 @@ public class MainActivity extends AppCompatActivity {
                 public void onSuccess(IMqttToken asyncActionToken) {
                     Log.d("[SUCCES]", "CONNECTED");
                     Toast.makeText(MainActivity.this, "CONNECTER", Toast.LENGTH_LONG).show();
-                    findViewById(R.id.frameConnecting).setVisibility(View.GONE);
-                    findViewById(R.id.frameConnectionFailed).setVisibility(View.GONE);
+                    frameConnecting.setVisibility(View.GONE);
+                    frameConnectionFailed.setVisibility(View.GONE);
                     setSubscription();
                     setClientCallbacks();
 
@@ -173,8 +174,8 @@ public class MainActivity extends AppCompatActivity {
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
                     Log.d("[FAILURE]", "CONNECTION FAILED");
                     Toast.makeText(MainActivity.this, "CONNECTION ECHOUER", Toast.LENGTH_LONG).show();
-                    findViewById(R.id.frameConnecting).setVisibility(View.GONE);
-                    findViewById(R.id.frameConnectionFailed).setVisibility(View.VISIBLE);
+                    frameConnecting.setVisibility(View.GONE);
+                    frameConnectionFailed.setVisibility(View.VISIBLE);
 
                     try {
                         IMqttToken token = client.disconnect();

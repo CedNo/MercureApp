@@ -15,6 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MercureApp">
         <activity
+            android:name=".Activity_Cnx"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name">
@@ -24,6 +28,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service android:name="org.eclipse.paho.android.service.MqttService" />
     </application>
 

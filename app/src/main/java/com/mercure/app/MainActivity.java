@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -86,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void messageArrived(String topic, MqttMessage message) throws Exception {
-                Log.d("[MESSAGE]", new String(message.getPayload()));
+//                Log.d("[MESSAGE]", new String(message.getPayload()));
                 String m = new String(message.getPayload());
                 double d = Double.parseDouble(m);
 
@@ -95,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (topic) {
                     case "speed": {
                         int i = (int) Math.abs(d);
+                        Log.d("[VITESSE]", Math.abs(i) + "");
                         String txt = i + " m/s";
                         ((CustomGauge) findViewById(R.id.displaySpeed)).setValue(i);
                         ((TextView) findViewById(R.id.tvSpeed)).setText(txt);
@@ -106,14 +108,16 @@ public class MainActivity extends AppCompatActivity {
                         String txt = Math.abs(y) + "°";
                         ((CustomGauge) findViewById(R.id.displayAngleFace)).setValue(y);
                         ((TextView) findViewById(R.id.tvAngleFace)).setText(txt);
+                        ((ImageView) findViewById(R.id.imgJeepStats)).setRotation(y);
                         break;
                     }
                     case "angleX": {
                         int x = (int) (d * 90);
-                        Log.d("[ANGLE Y]", Math.abs(x) + "");
+                        Log.d("[ANGLE X]", Math.abs(x) + "");
                         String txt = Math.abs(x) + "°";
                         ((CustomGauge) findViewById(R.id.displayAngleLateral)).setValue(x);
                         ((TextView) findViewById(R.id.tvAngleLateral)).setText(txt);
+                        ((ImageView) findViewById(R.id.imgJeepStats)).setRotationX(x);
                         break;
                     }
                 }

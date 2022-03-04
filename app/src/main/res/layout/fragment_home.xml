@@ -131,81 +131,114 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/linearLayout2"
+            android:id="@+id/layoutAuto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <pl.pawelkleczkowski.customgauge.CustomGauge
-                android:id="@+id/displayAngleFace"
-                android:layout_width="140dp"
-                android:layout_height="140dp"
-                android:layout_marginVertical="10dp"
-                android:layout_marginStart="48dp"
-                android:paddingLeft="20dp"
-                android:paddingTop="20dp"
-                android:paddingRight="20dp"
-                android:paddingBottom="20dp"
-                app:gaugeEndValue="-90"
-                app:gaugePointEndColor="@color/main_blue"
-                app:gaugePointSize="6"
-                app:gaugePointStartColor="@color/main_blue"
-                app:gaugeStartAngle="90"
-                app:gaugeStartValue="90"
-                app:gaugeStrokeCap="ROUND"
-                app:gaugeStrokeColor="@color/gauge_grey"
-                app:gaugeStrokeWidth="10dp"
-                app:gaugeSweepAngle="180"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tvAngleFace"
-                android:layout_width="50dp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutAngleY"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="96dp"
-                android:text="0°"
-                android:textAlignment="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.503" />
+                app:layout_constraintVertical_bias="0.611">
 
-            <pl.pawelkleczkowski.customgauge.CustomGauge
-                android:id="@+id/displayAngleLateral"
-                android:layout_width="140dp"
-                android:layout_height="140dp"
-                android:layout_marginVertical="10dp"
-                android:layout_marginEnd="48dp"
-                android:paddingLeft="20dp"
-                android:paddingTop="20dp"
-                android:paddingRight="20dp"
-                android:paddingBottom="20dp"
-                app:gaugeEndValue="90"
-                app:gaugePointEndColor="@color/main_blue"
-                app:gaugePointSize="6"
-                app:gaugePointStartColor="@color/main_blue"
-                app:gaugeStartAngle="180"
-                app:gaugeStartValue="-90"
-                app:gaugeStrokeCap="ROUND"
-                app:gaugeStrokeColor="@color/gauge_grey"
-                app:gaugeStrokeWidth="10dp"
-                app:gaugeSweepAngle="180"
-                app:layout_constraintBottom_toBottomOf="parent"
+                <TextView
+                    android:id="@+id/tvAngleLateral"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:text="0°"
+                    android:textAlignment="center"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.366"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.503" />
+
+                <pl.pawelkleczkowski.customgauge.CustomGauge
+                    android:id="@+id/displayAngleLateral"
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:layout_marginVertical="10dp"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="20dp"
+                    app:gaugeEndValue="90"
+                    app:gaugePointEndColor="@color/main_blue"
+                    app:gaugePointSize="6"
+                    app:gaugePointStartColor="@color/main_blue"
+                    app:gaugeStartAngle="90"
+                    app:gaugeStartValue="-90"
+                    app:gaugeStrokeCap="ROUND"
+                    app:gaugeStrokeColor="@color/gauge_grey"
+                    app:gaugeStrokeWidth="10dp"
+                    app:gaugeSweepAngle="180"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.2" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutAngleZ"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <pl.pawelkleczkowski.customgauge.CustomGauge
+                    android:id="@+id/displayAngleFace"
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:layout_marginVertical="10dp"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="20dp"
+                    app:gaugeEndValue="-90"
+                    app:gaugePointEndColor="@color/main_blue"
+                    app:gaugePointSize="6"
+                    app:gaugePointStartColor="@color/main_blue"
+                    app:gaugeStartAngle="180"
+                    app:gaugeStartValue="90"
+                    app:gaugeStrokeCap="ROUND"
+                    app:gaugeStrokeColor="@color/gauge_grey"
+                    app:gaugeStrokeWidth="10dp"
+                    app:gaugeSweepAngle="180"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvAngleFace"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="44dp"
+                    android:text="0°"
+                    android:textAlignment="center"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/displayAngleFace" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ImageView
+                android:id="@+id/imgJeepStats"
+                android:layout_width="214dp"
+                android:layout_height="267dp"
+                android:layout_marginTop="32dp"
+                android:src="@drawable/wrangler"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.68"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tvAngleLateral"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="92dp"
-                android:text="0°"
-                android:textAlignment="center"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.503" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>

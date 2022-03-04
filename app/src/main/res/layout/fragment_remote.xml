@@ -7,6 +7,111 @@
     tools:context=".ui.remote.RemoteFragment">
 
     <Switch
+        android:id="@+id/startVideo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Démarrer la video"
+        app:layout_constraintEnd_toStartOf="@+id/startAutoMode"
+        app:layout_constraintHorizontal_bias="0.215"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <ImageButton
+        android:id="@+id/btAvancer"
+        style="@android:style/Widget.ImageButton"
+        android:layout_width="128dp"
+        android:layout_height="116dp"
+        android:layout_marginTop="28dp"
+        android:backgroundTint="#FFFF"
+        android:rotation="90"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_left_turn"
+        app:layout_constraintEnd_toStartOf="@+id/btAvDroit"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toEndOf="@+id/btAvGauche"
+        app:layout_constraintTop_toBottomOf="@+id/carVideo"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/btAvDroit"
+        style="@android:style/Widget.ImageButton"
+        android:layout_width="105dp"
+        android:layout_height="98dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="#FFFF"
+        android:rotation="135"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_left_turn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/carVideo"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/btArDroit"
+        style="@android:style/Widget.ImageButton"
+        android:layout_width="105dp"
+        android:layout_height="98dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="#FFFF"
+        android:rotation="225"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_left_turn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btAvDroit"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/btReculer"
+        style="@android:style/Widget.ImageButton"
+        android:layout_width="128dp"
+        android:layout_height="116dp"
+        android:backgroundTint="#FFFF"
+        android:rotation="270"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_left_turn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btArDroit"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toEndOf="@+id/btArGauche"
+        app:layout_constraintTop_toBottomOf="@+id/btAvancer"
+        app:layout_constraintVertical_bias="0.512"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/btArGauche"
+        style="@android:style/Widget.ImageButton"
+        android:layout_width="105dp"
+        android:layout_height="98dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#FFFF"
+        android:rotation="315"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_left_turn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btAvGauche"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/btAvGauche"
+        style="@android:style/Widget.ImageButton"
+        android:layout_width="105dp"
+        android:layout_height="98dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="64dp"
+        android:backgroundTint="#FFFF"
+        android:rotation="45"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_left_turn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/carVideo"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <Switch
         android:id="@+id/startAutoMode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,5 +120,30 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.904"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <VideoView
+        android:id="@+id/carVideo"
+        android:layout_width="376dp"
+        android:layout_height="197dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.542"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/startAutoMode" />
+
+    <Button
+        android:id="@+id/btStop"
+        android:layout_width="239dp"
+        android:layout_height="59dp"
+        android:backgroundTint="#C60000"
+        android:text="Stop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btReculer"
+        app:layout_constraintVertical_bias="0.609" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

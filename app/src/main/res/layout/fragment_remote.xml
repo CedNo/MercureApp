@@ -127,11 +127,11 @@
         android:id="@+id/carVideo"
         android:layout_width="376dp"
         android:layout_height="197dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.542"
+        app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/startAutoMode" />
+        app:layout_constraintTop_toBottomOf="@+id/startVideo" />
 
     <Button
         android:id="@+id/btStop"
@@ -145,5 +145,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btReculer"
         app:layout_constraintVertical_bias="0.609" />
+
+    <TextView
+        android:id="@+id/tvEvent"
+        android:layout_width="377dp"
+        android:layout_height="347dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/btStop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/carVideo"
+        app:layout_constraintVertical_bias="0.45" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

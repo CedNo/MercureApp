@@ -32,6 +32,7 @@ public class RemoteFragment extends Fragment
 
     Button btStop;
     ImageButton btAvancer, btReculer, btAvDroit, btAvGauche, btArDroit,btArGauche;
+    TextView tvEvent;
     Switch startAutoMode, startVideo;
     VideoView carVideo;
     MainActivity mainActivity;
@@ -78,6 +79,9 @@ public class RemoteFragment extends Fragment
         startAutoMode = view.findViewById(R.id.startAutoMode);
         startVideo    = view.findViewById(R.id.startVideo);
         carVideo      = view.findViewById(R.id.carVideo);
+        tvEvent       = view.findViewById(R.id.tvEvent);
+
+        tvEvent.setText("Test ajout de text sur plusieurs lignes \n Deuxieme ligne \n Troisième ligne");
 
         startAutoMode.setOnClickListener(new View.OnClickListener()
         {
@@ -92,6 +96,8 @@ public class RemoteFragment extends Fragment
                     btArDroit.setVisibility(View.INVISIBLE);
                     btArGauche.setVisibility(View.INVISIBLE);
                     btReculer.setVisibility(View.INVISIBLE);
+
+                    tvEvent.setVisibility(View.VISIBLE);
                 }
                 else {
                     btAvancer.setVisibility(View.VISIBLE);
@@ -100,6 +106,10 @@ public class RemoteFragment extends Fragment
                     btArDroit.setVisibility(View.VISIBLE);
                     btArGauche.setVisibility(View.VISIBLE);
                     btReculer.setVisibility(View.VISIBLE);
+
+                    tvEvent.setVisibility(View.INVISIBLE);
+
+                    stop();
                 }
             }
         });
@@ -113,7 +123,7 @@ public class RemoteFragment extends Fragment
 
                 }
                 else{
-
+                    carVideo.stopPlayback();
                 }
             }
         });

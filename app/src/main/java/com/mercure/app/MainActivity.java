@@ -159,6 +159,7 @@ public class MainActivity extends AppCompatActivity {
     private void setSubscription(){
         try{
             client.subscribe("accel",0);
+            client.subscribe("video",0);
         }catch (MqttException e){
             e.printStackTrace();
         }

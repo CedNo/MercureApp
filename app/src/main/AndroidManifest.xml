@@ -16,6 +16,10 @@
         android:theme="@style/Theme.MercureApp">
         <activity
             android:name=".Activity_Cnx"
+
+            android:windowSoftInputMode="adjustResize"/>
+
+
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">

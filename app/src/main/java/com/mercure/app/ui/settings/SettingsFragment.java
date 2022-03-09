@@ -1,6 +1,8 @@
 package com.mercure.app.ui.settings;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,8 +14,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.mercure.app.MainActivity;
 import com.mercure.app.R;
@@ -24,6 +28,7 @@ public class SettingsFragment extends Fragment {
     Context context;
     Button btSave;
     EditText inAdresse;
+    LinearLayout layoutSettings;
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -51,21 +56,46 @@ public class SettingsFragment extends Fragment {
         context = view.getContext();
         inAdresse = view.findViewById(R.id.inAdresseIP);
         btSave = view.findViewById(R.id.btSaveSettings);
+        layoutSettings = view.findViewById(R.id.layoutSettings);
 
         btSave.setOnClickListener(this::saveSettings);
 
         inAdresse.setText(MainActivity.address);
+
+        layoutSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hideSoftKeyboard((MainActivity) getActivity());
+            }
+        });
     }
 
     public void saveSettings(View view) {
         String adresse = inAdresse.getText().toString();
+
+        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("adresseMQTT", adresse);
+        editor.apply();
 
         if(!adresse.equals("")) {
             Log.d("[ADRESSE]", adresse);
             MainActivity.setAddress(adresse);
         }
 
-        Navigation.findNavController(view).navigate(R.id.navigation_home);
+        //Navigation.findNavController(view).navigate(R.id.navigation_home);
         ((MainActivity)getActivity()).connect();
+    }
+
+    public static void hideSoftKeyboard(Activity activity) {
+        InputMethodManager inputMethodManager =
+                (InputMethodManager) activity.getSystemService(
+                        Activity.INPUT_METHOD_SERVICE);
+        if(inputMethodManager.isAcceptingText()){
+            inputMethodManager.hideSoftInputFromWindow(
+                    activity.getCurrentFocus().getWindowToken(),
+                    0
+            );
+        }
     }
 }

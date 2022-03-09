@@ -27,9 +27,6 @@ public class HomeFragment extends Fragment {
 
     Context context;
 
-    ConstraintLayout frameConnecting;
-    ConstraintLayout frameConnectionFailed;
-
     ImageView btHomeRefreshConnection;
 
     CustomGauge displaySpeed;
@@ -58,8 +55,8 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         context = view.getContext();
-        frameConnecting = view.findViewById(R.id.frameConnecting);
-        frameConnectionFailed = view.findViewById(R.id.frameConnectionFailed);
+        MainActivity.frameConnecting = view.findViewById(R.id.frameConnecting);
+        MainActivity.frameConnectionFailed = view.findViewById(R.id.frameConnectionFailed);
         btHomeRefreshConnection = view.findViewById(R.id.btHomeRefreshConnection);
         displaySpeed = view.findViewById(R.id.displaySpeed);
         displayAngleFace = view.findViewById(R.id.displayAngleFace);
@@ -72,12 +69,12 @@ public class HomeFragment extends Fragment {
         btHomeRefreshConnection.setOnClickListener(this::refreshConnection);
 
         if(MainActivity.isConnected) {
-            frameConnecting.setVisibility(View.GONE);
-            frameConnectionFailed.setVisibility(View.GONE);
+            MainActivity.frameConnecting.setVisibility(View.GONE);
+            MainActivity.frameConnectionFailed.setVisibility(View.GONE);
         }
         else {
             refreshConnection(view);
-            frameConnecting.setVisibility(View.VISIBLE);
+            MainActivity.frameConnecting.setVisibility(View.VISIBLE);
         }
     }
 

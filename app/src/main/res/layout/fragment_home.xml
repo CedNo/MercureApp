@@ -10,7 +10,7 @@
         android:id="@+id/frameConnecting"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#8000A6FF"
+        android:background="#3EA5FF"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,7 +46,7 @@
         android:id="@+id/frameConnectionFailed"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#80FF3636"
+        android:background="#CF2E2E"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -86,9 +86,11 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
+        android:id="@+id/infos_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layoutAuto"

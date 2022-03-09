@@ -75,10 +75,12 @@ public class HomeFragment extends Fragment {
         if(MainActivity.isConnected) {
             MainActivity.frameConnecting.setVisibility(View.GONE);
             MainActivity.frameConnectionFailed.setVisibility(View.GONE);
+            view.findViewById(R.id.infos_layout).setVisibility(View.VISIBLE);
         }
         else {
             refreshConnection(view);
             MainActivity.frameConnecting.setVisibility(View.VISIBLE);
+            view.findViewById(R.id.infos_layout).setVisibility(View.GONE);
         }
     }
 

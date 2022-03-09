@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="main_blue">#00A6FF</color>
     <color name="gauge_grey">#DCDCDC</color>
+    <color name="rouge_jeep">#B40808</color>
+    <color name="rouge_err">#FF0000</color>
 </resources>

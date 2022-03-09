@@ -7,10 +7,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.ImageButton;
 import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
@@ -30,9 +27,7 @@ public class RemoteFragment extends Fragment
 
     Context context;
 
-    Button btStop;
-    ImageButton btAvancer, btReculer, btAvDroit, btAvGauche, btArDroit,btArGauche;
-    TextView tvEvent;
+    Button btStop, btAvancer, btAvDroit, btArDroit, btReculer, btAvGauche, btArGauche;
     Switch startAutoMode, startVideo;
     VideoView carVideo;
     MainActivity mainActivity;
@@ -79,9 +74,6 @@ public class RemoteFragment extends Fragment
         startAutoMode = view.findViewById(R.id.startAutoMode);
         startVideo    = view.findViewById(R.id.startVideo);
         carVideo      = view.findViewById(R.id.carVideo);
-        tvEvent       = view.findViewById(R.id.tvEvent);
-
-        tvEvent.setText("Test ajout de text sur plusieurs lignes \n Deuxieme ligne \n Troisième ligne");
 
         startAutoMode.setOnClickListener(new View.OnClickListener()
         {
@@ -96,8 +88,6 @@ public class RemoteFragment extends Fragment
                     btArDroit.setVisibility(View.INVISIBLE);
                     btArGauche.setVisibility(View.INVISIBLE);
                     btReculer.setVisibility(View.INVISIBLE);
-
-                    tvEvent.setVisibility(View.VISIBLE);
                 }
                 else {
                     btAvancer.setVisibility(View.VISIBLE);
@@ -106,8 +96,6 @@ public class RemoteFragment extends Fragment
                     btArDroit.setVisibility(View.VISIBLE);
                     btArGauche.setVisibility(View.VISIBLE);
                     btReculer.setVisibility(View.VISIBLE);
-
-                    tvEvent.setVisibility(View.INVISIBLE);
 
                     stop();
                 }

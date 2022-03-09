@@ -21,7 +21,6 @@ import com.mercure.app.databinding.FragmentRemoteBinding;
 
 public class RemoteFragment extends Fragment
 {
-
     private RemoteViewModel remoteViewModel;
     private FragmentRemoteBinding binding;
 

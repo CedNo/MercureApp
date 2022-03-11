@@ -19,4 +19,6 @@
     <color name="trajets_grey2">#453D3D</color>
     <color name="trajets_black">#0E0E0E</color>
     <color name="trajets_white">#C8BFBF</color>
+    <color name="rouge_jeep">#B40808</color>
+    <color name="rouge_err">#FF0000</color>
 </resources>

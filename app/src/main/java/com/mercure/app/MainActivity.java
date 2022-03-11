@@ -140,6 +140,18 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void publishing(String topic, String message)
+    {
+        try
+        {
+            client.publish(topic, message.getBytes(),0,false);
+            Toast.makeText(this,"Published Message",Toast.LENGTH_SHORT).show();
+        } catch ( MqttException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     private void setSubscription(){
         try{
             client.subscribe("accel",0);

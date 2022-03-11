@@ -26,7 +26,9 @@ import com.mercure.app.R;
 import com.mercure.app.Trajet;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Locale;
 
@@ -34,15 +36,12 @@ public class AdapterHistory extends RecyclerView.Adapter<AdapterHistory.MonViewH
 
     List<Trajet> liste;
     Context mainContext;
-    TrajetViewModel trajetViewModel;
+    HistoryViewModel trajetViewModel;
 
-    boolean isPageInscrit;
-
-    public AdapterHistory(List<Trajet> liste, Context mainContext, TrajetViewModel trajetViewModel, boolean isPageInscrit) {
+    public AdapterHistory(List<Trajet> liste, Context mainContext, HistoryViewModel trajetViewModel) {
         this.liste = liste;
         this.mainContext = mainContext;
         this.trajetViewModel = trajetViewModel;
-        this.isPageInscrit = isPageInscrit;
     }
 
     @NonNull
@@ -57,9 +56,44 @@ public class AdapterHistory extends RecyclerView.Adapter<AdapterHistory.MonViewH
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onBindViewHolder(@NonNull MonViewHolder holder, int position) {
-        Trajet e = liste.get(position);
+        Trajet trajet = liste.get(position);
+        LocalDateTime dateTrajet = trajet.getDateTime();
 
-//        holder.tvTitre.setText(e.getTitre());
+        long secondsAgo = ChronoUnit.SECONDS.between(dateTrajet, LocalDateTime.now());
+        long minutesAgo = ChronoUnit.MINUTES.between(dateTrajet, LocalDateTime.now());
+        long hoursAgo = ChronoUnit.HOURS.between(dateTrajet, LocalDateTime.now());
+        long daysAgo = ChronoUnit.DAYS.between(dateTrajet, LocalDateTime.now());
+        long monthsAgo = ChronoUnit.MONTHS.between(dateTrajet, LocalDateTime.now());
+        long yearsAgo = ChronoUnit.YEARS.between(dateTrajet, LocalDateTime.now());
+
+        String txtAgo = "";
+
+        if(yearsAgo > 0) {
+            txtAgo = "Il y a " + yearsAgo + " an(s)";
+        }
+        else if(monthsAgo > 0) {
+            txtAgo = "Il y a " + monthsAgo + " mois";
+        }
+        else if(daysAgo > 0) {
+            txtAgo = "Il y a " + daysAgo + " jour(s)";
+        }
+        else if(hoursAgo > 0) {
+            txtAgo = "Il y a " + hoursAgo + " heure(s)";
+        }
+        else if(minutesAgo > 0) {
+            txtAgo = "Il y a " + minutesAgo + " minute(s)";
+        }
+        else if(secondsAgo >= 0) {
+            txtAgo = "Il y a " + secondsAgo + " seconde(s)";
+        }
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        String txtDate = dateTrajet.format(formatter);
+        String txtDistance = trajet.getDistance() + "m";
+
+        holder.tvDate.setText(txtDate);
+        holder.tvDistance.setText(txtDistance);
+        holder.tvAgo.setText(txtAgo);
     }
 
     @Override
@@ -69,12 +103,14 @@ public class AdapterHistory extends RecyclerView.Adapter<AdapterHistory.MonViewH
 
     public class MonViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvTitre;
+        TextView tvDate, tvDistance, tvAgo;
 
         public MonViewHolder(@NonNull View itemView) {
             super(itemView);
 
-//            tvTitre = itemView.findViewById(R.id.tvTitre);
+            tvDate = itemView.findViewById(R.id.tvDate);
+            tvDistance = itemView.findViewById(R.id.tvDistance);
+            tvAgo = itemView.findViewById(R.id.tvAgo);
         }
     }
 }

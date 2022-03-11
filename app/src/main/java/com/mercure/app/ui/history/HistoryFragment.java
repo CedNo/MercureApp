@@ -2,6 +2,7 @@ package com.mercure.app.ui.history;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,15 +13,23 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.mercure.app.MainActivity;
 import com.mercure.app.R;
+import com.mercure.app.Trajet;
 import com.mercure.app.databinding.FragmentHistoryBinding;
+
+import java.util.List;
 
 public class HistoryFragment extends Fragment {
 
     private HistoryViewModel historyViewModel;
     private FragmentHistoryBinding binding;
+
+    RecyclerView rvListe;
+    AdapterHistory adapterListe;
 
     Context context;
 
@@ -36,7 +45,27 @@ public class HistoryFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         context = view.getContext();
+
+        historyViewModel = new ViewModelProvider(this).get(HistoryViewModel.class);
+        historyViewModel.getTrajets().observe(getViewLifecycleOwner(), trajetsObserver);
+
+        rvListe = view.findViewById(R.id.rv_history);
+        rvListe.setHasFixedSize(true);
+        rvListe.setLayoutManager(new LinearLayoutManager(context));
+        Log.d("[LISTE]", view.findViewById(R.id.tvDate) + "");
+        adapterListe = new AdapterHistory(historyViewModel.getTrajets().getValue(), context, historyViewModel);
+        rvListe.setAdapter(adapterListe);
     }
+
+    Observer<List<Trajet>> trajetsObserver = new Observer<List<Trajet>>() {
+        @Override
+        public void onChanged(List<Trajet> trajetList) {
+            if(historyViewModel.getTrajets().getValue().size() != 0) {
+                adapterListe.notifyDataSetChanged();
+                rvListe.smoothScrollToPosition(historyViewModel.getTrajets().getValue().size() - 1);
+            }
+        }
+    };
 
     @Override
     public void onDestroyView() {

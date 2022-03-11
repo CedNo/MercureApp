@@ -80,7 +80,6 @@ public class HomeFragment extends Fragment {
         }
         else {
             refreshConnection(view);
-            MainActivity.frameConnecting.setVisibility(View.VISIBLE);
             view.findViewById(R.id.infos_layout).setVisibility(View.GONE);
         }
     }

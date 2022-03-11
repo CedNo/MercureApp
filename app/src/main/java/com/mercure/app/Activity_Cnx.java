@@ -16,6 +16,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.sql.Connection;
+
 import br.com.simplepass.loadingbutton.customViews.CircularProgressButton;
 
 public class Activity_Cnx extends AppCompatActivity {
@@ -34,6 +36,8 @@ public class Activity_Cnx extends AppCompatActivity {
         txtMdp = findViewById(R.id.txtMdp);
         Bitmap ic_error = drawableToBitmap(getResources().getDrawable(R.drawable.ic_error));
         Bitmap ic_check = drawableToBitmap(getResources().getDrawable(R.drawable.ic_check));
+
+        Connection con = Database.getInstance().getConnection();
 
 
 

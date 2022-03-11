@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static ConstraintLayout frameConnecting;
     public static ConstraintLayout frameConnectionFailed;
+    public static LinearLayout frameInfos;
     private ActivityMainBinding binding;
     Context context;
 
@@ -76,12 +78,6 @@ public class MainActivity extends AppCompatActivity {
         address = sharedPref.getString("adresseMQTT", defaultValue);
 
         clientId = MqttClient.generateClientId();
-
-        Log.d("[CHECK STATUS]", isConnected.toString());
-
-        if(!isConnected) {
-            connect();
-        }
     }
 
     public void setClientCallbacks() {
@@ -166,6 +162,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void connect(){
         Log.d("[CONNECTING]", "CALLING MainActivity.connect()...");
+        frameConnecting.setVisibility(View.VISIBLE);
+        frameConnectionFailed.setVisibility(View.GONE);
         client = new MqttAndroidClient(context, address, clientId);
         try {
             IMqttToken token = client.connect();
@@ -176,6 +174,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "CONNECTER", Toast.LENGTH_LONG).show();
                     frameConnecting.setVisibility(View.GONE);
                     frameConnectionFailed.setVisibility(View.GONE);
+                    frameInfos.setVisibility(View.VISIBLE);
                     setSubscription();
                     setClientCallbacks();
 
@@ -186,6 +185,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
                     Log.d("[FAILURE]", "CONNECTION FAILED");
                     Toast.makeText(MainActivity.this, "CONNECTION ECHOUER", Toast.LENGTH_LONG).show();
+                    frameInfos.setVisibility(View.GONE);
                     frameConnecting.setVisibility(View.GONE);
                     frameConnectionFailed.setVisibility(View.VISIBLE);
 

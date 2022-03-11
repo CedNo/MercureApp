@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,19 +30,23 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 public class AdapterHistory extends RecyclerView.Adapter<AdapterHistory.MonViewHolder> {
 
     List<Trajet> liste;
     Context mainContext;
     HistoryViewModel trajetViewModel;
+    List<Integer> colors;
 
     public AdapterHistory(List<Trajet> liste, Context mainContext, HistoryViewModel trajetViewModel) {
         this.liste = liste;
         this.mainContext = mainContext;
         this.trajetViewModel = trajetViewModel;
+        initiateColors();
     }
 
     @NonNull
@@ -90,10 +95,13 @@ public class AdapterHistory extends RecyclerView.Adapter<AdapterHistory.MonViewH
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         String txtDate = dateTrajet.format(formatter);
         String txtDistance = trajet.getDistance() + "m";
+        Random rnd = new Random();
+        int colorBackgroud = colors.get(rnd.nextInt(colors.size()));
 
         holder.tvDate.setText(txtDate);
         holder.tvDistance.setText(txtDistance);
         holder.tvAgo.setText(txtAgo);
+        holder.cvTrajet.setCardBackgroundColor(colorBackgroud);
     }
 
     @Override
@@ -104,6 +112,7 @@ public class AdapterHistory extends RecyclerView.Adapter<AdapterHistory.MonViewH
     public class MonViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvDate, tvDistance, tvAgo;
+        CardView cvTrajet;
 
         public MonViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -111,6 +120,17 @@ public class AdapterHistory extends RecyclerView.Adapter<AdapterHistory.MonViewH
             tvDate = itemView.findViewById(R.id.tvDate);
             tvDistance = itemView.findViewById(R.id.tvDistance);
             tvAgo = itemView.findViewById(R.id.tvAgo);
+            cvTrajet = itemView.findViewById(R.id.cvTrajet);
         }
+    }
+
+    private void initiateColors() {
+        colors = new ArrayList<Integer>();
+        colors.add(ResourcesCompat.getColor(mainContext.getResources(), R.color.trajets_red1, null));
+        colors.add(ResourcesCompat.getColor(mainContext.getResources(), R.color.trajets_red2, null));
+        colors.add(ResourcesCompat.getColor(mainContext.getResources(), R.color.trajets_grey1, null));
+        colors.add(ResourcesCompat.getColor(mainContext.getResources(), R.color.trajets_grey2, null));
+        colors.add(ResourcesCompat.getColor(mainContext.getResources(), R.color.trajets_black, null));
+        colors.add(ResourcesCompat.getColor(mainContext.getResources(), R.color.trajets_white, null));
     }
 }

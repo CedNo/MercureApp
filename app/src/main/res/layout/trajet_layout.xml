@@ -6,6 +6,7 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cvTrajet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
@@ -19,14 +20,15 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="5dp">
+            android:layout_marginLeft="4dp"
+            android:background="@color/white">
 
             <TextView
                 android:id="@+id/tvDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="16dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="12dp"
                 android:text="DATE TRAJET"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -37,7 +39,7 @@
                 android:id="@+id/tvAgo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
+                android:layout_marginStart="12dp"
                 android:layout_marginBottom="16dp"
                 android:text="Il y a 2 secondes"
                 app:layout_constraintBottom_toBottomOf="parent"

@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static ConstraintLayout frameConnecting;
     public static ConstraintLayout frameConnectionFailed;
+    public static ConstraintLayout frameInfos;
     private ActivityMainBinding binding;
     Context context;
 
@@ -164,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "CONNECTER", Toast.LENGTH_LONG).show();
                     frameConnecting.setVisibility(View.GONE);
                     frameConnectionFailed.setVisibility(View.GONE);
-                    findViewById(R.id.infos_layout).setVisibility(View.VISIBLE);
+                    frameInfos.setVisibility(View.VISIBLE);
                     setSubscription();
                     setClientCallbacks();
 
@@ -175,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
                     Log.d("[FAILURE]", "CONNECTION FAILED");
                     Toast.makeText(MainActivity.this, "CONNECTION ECHOUER", Toast.LENGTH_LONG).show();
-                    findViewById(R.id.infos_layout).setVisibility(View.GONE);
+                    frameInfos.setVisibility(View.GONE);
                     frameConnecting.setVisibility(View.GONE);
                     frameConnectionFailed.setVisibility(View.VISIBLE);
 

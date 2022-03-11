@@ -61,6 +61,7 @@ public class HomeFragment extends Fragment {
         context = view.getContext();
         MainActivity.frameConnecting = view.findViewById(R.id.frameConnecting);
         MainActivity.frameConnectionFailed = view.findViewById(R.id.frameConnectionFailed);
+        MainActivity.frameInfos = view.findViewById(R.id.infos_layout);
         btHomeRefreshConnection = view.findViewById(R.id.btHomeRefreshConnection);
         displaySpeed = view.findViewById(R.id.displaySpeed);
         displayAngleFace = view.findViewById(R.id.displayAngleFace);

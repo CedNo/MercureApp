@@ -182,7 +182,6 @@
         android:layout_width="376dp"
         android:layout_height="197dp"
         tools:ignore="MissingConstraints" />
-
     -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

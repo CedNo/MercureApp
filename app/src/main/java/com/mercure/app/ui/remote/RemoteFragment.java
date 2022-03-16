@@ -7,10 +7,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.ImageButton;
 import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
@@ -24,14 +21,12 @@ import com.mercure.app.databinding.FragmentRemoteBinding;
 
 public class RemoteFragment extends Fragment
 {
-
     private RemoteViewModel remoteViewModel;
     private FragmentRemoteBinding binding;
 
     Context context;
 
-    Button btStop;
-    ImageButton btAvancer, btReculer, btAvDroit, btAvGauche, btArDroit,btArGauche;
+    Button btStop, btAvancer, btAvDroit, btArDroit, btReculer, btAvGauche, btArGauche;
     Switch startAutoMode, startVideo;
     VideoView carVideo;
     MainActivity mainActivity;
@@ -100,6 +95,8 @@ public class RemoteFragment extends Fragment
                     btArDroit.setVisibility(View.VISIBLE);
                     btArGauche.setVisibility(View.VISIBLE);
                     btReculer.setVisibility(View.VISIBLE);
+
+                    stop();
                 }
             }
         });
@@ -113,7 +110,7 @@ public class RemoteFragment extends Fragment
 
                 }
                 else{
-
+                    carVideo.stopPlayback();
                 }
             }
         });

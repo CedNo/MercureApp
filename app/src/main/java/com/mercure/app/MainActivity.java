@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -145,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
         try
         {
             client.publish(topic, message.getBytes(),0,false);
-            Toast.makeText(this,"Published Message",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Tu as publié " + message,Toast.LENGTH_SHORT).show();
         } catch ( MqttException e)
         {
             e.printStackTrace();
@@ -155,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
     private void setSubscription(){
         try{
             client.subscribe("accel",0);
+            client.subscribe("video",0);
         }catch (MqttException e){
             e.printStackTrace();
         }

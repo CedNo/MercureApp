@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.lifecycle.ViewModelProvider;
@@ -26,6 +28,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.mercure.app.R;
 import com.mercure.app.Trajet;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -101,7 +104,26 @@ public class AdapterHistory extends RecyclerView.Adapter<AdapterHistory.MonViewH
         holder.tvDate.setText(txtDate);
         holder.tvDistance.setText(txtDistance);
         holder.tvAgo.setText(txtAgo);
+
         holder.cvTrajet.setCardBackgroundColor(colorBackgroud);
+        holder.cvTrajet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                InfosTrajetFragment infosFrag = new InfosTrajetFragment();
+
+
+                Bundle bundle = new Bundle();
+                Trajet trajet = trajetViewModel.getTrajets().getValue().get(position);
+                bundle.putSerializable("trajet", trajet);
+                infosFrag.setArguments(bundle);
+
+                activity.getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.nav_host_fragment_activity_main, infosFrag, "infosFragment")
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
     }
 
     @Override

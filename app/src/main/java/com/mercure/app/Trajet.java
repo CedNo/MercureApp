@@ -1,10 +1,12 @@
 package com.mercure.app;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Trajet {
+public class Trajet implements Serializable {
 
     int vitesseMax;
+    int vitesseMoy;
     int angleYmax;
     int angleXmax;
     double distance;
@@ -12,8 +14,9 @@ public class Trajet {
     LocalDateTime dateTime;
     int obstacles;
 
-    public Trajet(int vitesseMax, int angleYmax, int angleXmax, double distance, double temps, LocalDateTime dateTime, int obstacles) {
+    public Trajet(int vitesseMax, int vitesseMoy, int angleYmax, int angleXmax, double distance, double temps, LocalDateTime dateTime, int obstacles) {
         this.vitesseMax = vitesseMax;
+        this.vitesseMoy = vitesseMoy;
         this.angleYmax = angleYmax;
         this.angleXmax = angleXmax;
         this.distance = distance;
@@ -28,6 +31,14 @@ public class Trajet {
 
     public void setVitesseMax(int vitesseMax) {
         this.vitesseMax = vitesseMax;
+    }
+
+    public int getVitesseMoy() {
+        return vitesseMoy;
+    }
+
+    public void setVitesseMoy(int vitesseMoy) {
+        this.vitesseMoy = vitesseMoy;
     }
 
     public int getAngleYmax() {

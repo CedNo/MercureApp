@@ -35,8 +35,7 @@ public class HistoryFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        historyViewModel =
-                new ViewModelProvider(this).get(HistoryViewModel.class);
+        historyViewModel = new ViewModelProvider(this).get(HistoryViewModel.class);
 
         binding = FragmentHistoryBinding.inflate(inflater, container, false);
         return binding.getRoot();
@@ -46,7 +45,6 @@ public class HistoryFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         context = view.getContext();
 
-        historyViewModel = new ViewModelProvider(this).get(HistoryViewModel.class);
         historyViewModel.getTrajets().observe(getViewLifecycleOwner(), trajetsObserver);
 
         rvListe = view.findViewById(R.id.rv_history);

@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
             public void messageArrived(String topic, MqttMessage message) throws Exception {
                 Log.d("[MESSAGE]", new String(message.getPayload()));
 
-//              TODO FIX THE SETTING OF VALUES
+//              TODO FIX L'AFFICHAGE DES ANGLES (INVERSER)
                 switch (topic) {
                     case "accel": {
                         String[] m = new String(message.getPayload()).split("@", 4);

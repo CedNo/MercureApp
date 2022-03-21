@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.mercure.app.MainActivity;
 import com.mercure.app.R;
 import com.mercure.app.Trajet;
 

@@ -26,7 +26,9 @@ public class HistoryViewModel extends ViewModel {
 
     public LiveData<List<Trajet>> getTrajets() {
         if (trajetsLiveData == null) {
+            List<Trajet> list = new ArrayList<Trajet>();
             trajetsLiveData = new MutableLiveData<List<Trajet>>();
+            trajetsLiveData.setValue(list);
             genererListe();
             Log.d("[LISTE]", "LISTE GENERER -> " + trajetsLiveData.getValue());
         }
@@ -41,11 +43,7 @@ public class HistoryViewModel extends ViewModel {
         trajetsLiveData.postValue(currentTrajets);
     }
 
-    private void genererListe() {
-
-        List<Trajet> list = new ArrayList<Trajet>();
-        trajetsLiveData.setValue(list);
-
+    public void genererListe() {
         InterfaceServeur serveur = RetrofitInstance.getInstance().create(InterfaceServeur.class);
         Call<List<Trajet>> call = serveur.getTrajets();
 

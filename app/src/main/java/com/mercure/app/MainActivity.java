@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static ConstraintLayout frameConnecting;
     public static ConstraintLayout frameConnectionFailed;
-    public static LinearLayout frameInfos;
+    ImageView btHomeRefreshConnection;
     private ActivityMainBinding binding;
     Context context;
 
@@ -72,6 +72,10 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
+        frameConnecting = findViewById(R.id.frameConnecting);
+        frameConnectionFailed = findViewById(R.id.frameConnectionFailed);
+        btHomeRefreshConnection = findViewById(R.id.btHomeRefreshConnection);
+        btHomeRefreshConnection.setOnClickListener(this::refreshConnection);
         isConnected = false;
 
         SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
@@ -79,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
         address = sharedPref.getString("adresseMQTT", defaultValue);
 
         clientId = MqttClient.generateClientId();
+        connect();
     }
 
     public void setClientCallbacks() {
@@ -176,7 +181,6 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "CONNECTER", Toast.LENGTH_LONG).show();
                     frameConnecting.setVisibility(View.GONE);
                     frameConnectionFailed.setVisibility(View.GONE);
-                    frameInfos.setVisibility(View.VISIBLE);
                     setSubscription();
                     setClientCallbacks();
 
@@ -187,7 +191,6 @@ public class MainActivity extends AppCompatActivity {
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
                     Log.d("[FAILURE]", "CONNECTION FAILED");
                     Toast.makeText(MainActivity.this, "CONNECTION ECHOUER", Toast.LENGTH_LONG).show();
-                    frameInfos.setVisibility(View.GONE);
                     frameConnecting.setVisibility(View.GONE);
                     frameConnectionFailed.setVisibility(View.VISIBLE);
 
@@ -227,5 +230,10 @@ public class MainActivity extends AppCompatActivity {
 
     public static void setAddress(String address) {
         MainActivity.address = address;
+    }
+
+
+    public void refreshConnection(View view) {
+        connect();
     }
 }

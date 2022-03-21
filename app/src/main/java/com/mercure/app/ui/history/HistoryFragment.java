@@ -50,8 +50,12 @@ public class HistoryFragment extends Fragment {
         rvListe = view.findViewById(R.id.rv_history);
         rvListe.setHasFixedSize(true);
         rvListe.setLayoutManager(new LinearLayoutManager(context));
+        historyViewModel.genererListe();
         adapterListe = new AdapterHistory(historyViewModel.getTrajets().getValue(), context, historyViewModel);
         rvListe.setAdapter(adapterListe);
+
+        MainActivity.frameConnecting.setTranslationZ(-10);
+        MainActivity.frameConnectionFailed.setTranslationZ(-10);
     }
 
     Observer<List<Trajet>> trajetsObserver = new Observer<List<Trajet>>() {

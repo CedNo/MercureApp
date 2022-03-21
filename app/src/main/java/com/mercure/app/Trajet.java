@@ -2,19 +2,28 @@ package com.mercure.app;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import com.google.gson.annotations.SerializedName;
 
 public class Trajet implements Serializable {
 
-    int vitesseMax;
-    int vitesseMoy;
-    int angleYmax;
-    int angleXmax;
-    double distance;
-    double temps;
-    LocalDateTime dateTime;
-    int obstacles;
+    @SerializedName("vitesseMax")
+    String vitesseMax;
+    @SerializedName("vitesseMoyenne")
+    String vitesseMoy;
+    @SerializedName("angleMaxY")
+    String angleYmax;
+    @SerializedName("angleMaxX")
+    String angleXmax;
+    @SerializedName("distance")
+    String distance;
+    @SerializedName("temps")
+    String temps;
+    @SerializedName("dateTrajet")
+    String dateTime;
+    @SerializedName("obstacles")
+    String obstacles;
 
-    public Trajet(int vitesseMax, int vitesseMoy, int angleYmax, int angleXmax, double distance, double temps, LocalDateTime dateTime, int obstacles) {
+    public Trajet(String vitesseMax, String vitesseMoy, String angleYmax, String angleXmax, String distance, String temps, String dateTime, String obstacles) {
         this.vitesseMax = vitesseMax;
         this.vitesseMoy = vitesseMoy;
         this.angleYmax = angleYmax;
@@ -25,67 +34,67 @@ public class Trajet implements Serializable {
         this.obstacles = obstacles;
     }
 
-    public int getVitesseMax() {
+    public String getVitesseMax() {
         return vitesseMax;
     }
 
-    public void setVitesseMax(int vitesseMax) {
+    public void setVitesseMax(String vitesseMax) {
         this.vitesseMax = vitesseMax;
     }
 
-    public int getVitesseMoy() {
+    public String getVitesseMoy() {
         return vitesseMoy;
     }
 
-    public void setVitesseMoy(int vitesseMoy) {
+    public void setVitesseMoy(String vitesseMoy) {
         this.vitesseMoy = vitesseMoy;
     }
 
-    public int getAngleYmax() {
+    public String getAngleYmax() {
         return angleYmax;
     }
 
-    public void setAngleYmax(int angleYmax) {
+    public void setAngleYmax(String angleYmax) {
         this.angleYmax = angleYmax;
     }
 
-    public int getAngleXmax() {
+    public String getAngleXmax() {
         return angleXmax;
     }
 
-    public void setAngleXmax(int angleXmax) {
+    public void setAngleXmax(String angleXmax) {
         this.angleXmax = angleXmax;
     }
 
-    public double getDistance() {
+    public String getDistance() {
         return distance;
     }
 
-    public void setDistance(double distance) {
+    public void setDistance(String distance) {
         this.distance = distance;
     }
 
-    public double getTemps() {
+    public String getTemps() {
         return temps;
     }
 
-    public void setTemps(double temps) {
+    public void setTemps(String temps) {
         this.temps = temps;
     }
 
-    public LocalDateTime getDateTime() {
+    public String getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
+    public void setDateTime(String dateTime) {
         this.dateTime = dateTime;
     }
 
-    public int getObstacles() {
+    public String getObstacles() {
         return obstacles;
     }
 
-    public void setObstacles(int obstacles) {
+    public void setObstacles(String obstacles) {
         this.obstacles = obstacles;
     }
 }

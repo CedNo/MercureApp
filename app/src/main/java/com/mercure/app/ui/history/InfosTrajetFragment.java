@@ -1,5 +1,6 @@
 package com.mercure.app.ui.history;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -59,5 +60,4 @@ public class InfosTrajetFragment extends Fragment {
         tvAngleMaxX.setText(trajet.getAngleXmax() + "");
         tvObstacles.setText(trajet.getObstacles() + "");
     }
-
 }

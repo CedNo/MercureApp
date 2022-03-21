@@ -50,7 +50,6 @@ public class HistoryFragment extends Fragment {
         rvListe = view.findViewById(R.id.rv_history);
         rvListe.setHasFixedSize(true);
         rvListe.setLayoutManager(new LinearLayoutManager(context));
-        Log.d("[LISTE]", view.findViewById(R.id.tvDate) + "");
         adapterListe = new AdapterHistory(historyViewModel.getTrajets().getValue(), context, historyViewModel);
         rvListe.setAdapter(adapterListe);
     }
@@ -59,8 +58,8 @@ public class HistoryFragment extends Fragment {
         @Override
         public void onChanged(List<Trajet> trajetList) {
             if(historyViewModel.getTrajets().getValue().size() != 0) {
-                adapterListe.notifyDataSetChanged();
-                rvListe.smoothScrollToPosition(historyViewModel.getTrajets().getValue().size() - 1);
+                adapterListe = new AdapterHistory(historyViewModel.getTrajets().getValue(), context, historyViewModel);
+                rvListe.setAdapter(adapterListe);
             }
         }
     };

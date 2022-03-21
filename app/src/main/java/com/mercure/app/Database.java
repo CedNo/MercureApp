@@ -2,11 +2,13 @@ package com.mercure.app;
 
 import android.util.Log;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -37,6 +39,7 @@ public class Database {
                 String username = "mercure";
                 String password = "P4AarR!c?D";
                 con = DriverManager.getConnection(host, username, password);
+
             } catch (SQLException ex) {
                 Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
             }

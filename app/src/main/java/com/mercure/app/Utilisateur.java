@@ -5,42 +5,41 @@ import com.google.gson.annotations.SerializedName;
 public class Utilisateur {
 
     @SerializedName("id")
-    int id;
+    String id;
 
     @SerializedName("username")
-    String utilisateur;
+    String username;
 
     @SerializedName("password")
-    String mdp;
+    String password;
 
-
-    public Utilisateur(int id, String utilisateur, String mdp) {
+    public Utilisateur(String id, String username, String password) {
         this.id = id;
-        this.utilisateur = utilisateur;
-        this.mdp = mdp;
+        this.username = username;
+        this.password = password;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getUtilisateur() {
-        return utilisateur;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUtilisateur(String utilisateur) {
-        this.utilisateur = utilisateur;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getMdp() {
-        return mdp;
+    public String getPassword() {
+        return password;
     }
 
-    public void setMdp(String mdp) {
-        this.mdp = mdp;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

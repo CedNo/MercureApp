@@ -64,8 +64,10 @@ public class AdapterHistory extends RecyclerView.Adapter<AdapterHistory.MonViewH
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onBindViewHolder(@NonNull MonViewHolder holder, int position) {
-        Trajet trajet = liste.get(position);
-        LocalDateTime dateTrajet = trajet.getDateTime();
+        int pos = holder.getAdapterPosition();
+        Trajet trajet = liste.get(pos);
+        DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime dateTrajet = LocalDateTime.parse(trajet.getDateTime(), f);
 
         long secondsAgo = ChronoUnit.SECONDS.between(dateTrajet, LocalDateTime.now());
         long minutesAgo = ChronoUnit.MINUTES.between(dateTrajet, LocalDateTime.now());
@@ -114,7 +116,7 @@ public class AdapterHistory extends RecyclerView.Adapter<AdapterHistory.MonViewH
 
 
                 Bundle bundle = new Bundle();
-                Trajet trajet = trajetViewModel.getTrajets().getValue().get(position);
+                Trajet trajet = trajetViewModel.getTrajets().getValue().get(pos);
                 bundle.putSerializable("trajet", trajet);
                 infosFrag.setArguments(bundle);
 

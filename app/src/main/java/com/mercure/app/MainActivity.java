@@ -25,6 +25,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.mercure.app.databinding.ActivityMainBinding;
 import com.mercure.app.ui.home.HomeFragment;
+import com.mercure.app.ui.remote.JoystickView;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
@@ -39,7 +40,7 @@ import java.util.Arrays;
 
 import pl.pawelkleczkowski.customgauge.CustomGauge;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements JoystickView.JoystickListener {
 
     public static ConstraintLayout frameConnecting;
     public static ConstraintLayout frameConnectionFailed;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static String address;
     public static Boolean isConnected;
+    public static String mouvement;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
         btHomeRefreshConnection = findViewById(R.id.btHomeRefreshConnection);
         btHomeRefreshConnection.setOnClickListener(this::refreshConnection);
         isConnected = false;
+        mouvement = "stop";
 
         SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
         String defaultValue = "tcp://172.16.207.54:1883";
@@ -235,5 +238,49 @@ public class MainActivity extends AppCompatActivity {
 
     public void refreshConnection(View view) {
         connect();
+    }
+
+    @Override
+    public void onJoystickMoved(float xPercent, float yPercent, int id)
+    {
+        Log.d("Joystick", " X percent : " + xPercent + " Y percent : " + yPercent);
+
+        if(xPercent == 0.0 && yPercent == 0.0)
+        {
+            publishing("move", "stop");
+            mouvement = "stop";
+        }
+        // Avancer
+        else if((xPercent >= -0.3 && xPercent <= 0.3) && yPercent < -0 && mouvement != "av")
+        {
+            publishing("move", "avancer");
+            mouvement = "av";
+        }
+        else if((xPercent >= -0.9 && xPercent <= -0.3) && yPercent < 0 && mouvement != "avg" )
+        {
+            publishing("move", "avGauche");
+            mouvement = "avg";
+        }
+        else if((xPercent >= 0.3 && xPercent <=0.9) && yPercent < 0 && mouvement != "avd" )
+        {
+            publishing("move", "avDroit");
+            mouvement = "avd";
+        }
+        // Reculer
+        else if((xPercent >= -0.3 && xPercent <= 0.3) && yPercent > 0 && mouvement != "ar" )
+        {
+            publishing("move", "reculer");
+            mouvement = "ar";
+        }
+        else if((xPercent >= -0.9 && xPercent <= -0.3) && yPercent > 0 && mouvement != "arg" )
+        {
+            publishing("move", "arGauche");
+            mouvement = "arg";
+        }
+        else if((xPercent >= 0.3 && xPercent <=0.9) && yPercent > 0 && mouvement != "ard")
+        {
+            publishing("move", "arDroit");
+            mouvement = "ard";
+        }
     }
 }

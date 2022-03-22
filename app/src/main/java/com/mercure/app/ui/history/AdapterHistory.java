@@ -97,7 +97,7 @@ public class AdapterHistory extends RecyclerView.Adapter<AdapterHistory.MonViewH
             txtAgo = "Il y a " + secondsAgo + " seconde(s)";
         }
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, MMM dd, yyyy\nHH:mm:ss a");
         String txtDate = dateTrajet.format(formatter);
         String txtDistance = trajet.getDistance() + "m";
         Random rnd = new Random();

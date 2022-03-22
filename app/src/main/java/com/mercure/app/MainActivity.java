@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements JoystickView.Joys
                         double d0 = Double.parseDouble(m[0]);
                         int i = (int) Math.abs(d0);
                         Log.d("[VITESSE]", Math.abs(i) + "");
-                        String txt0 = i + " m/s";
+                        String txt0 = i + " km/h";
                         ((CustomGauge) findViewById(R.id.displaySpeed)).setValue(i);
                         ((TextView) findViewById(R.id.tvSpeed)).setText(txt0);
 

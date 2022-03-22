@@ -72,7 +72,7 @@ public class JoystickView extends SurfaceView implements SurfaceHolder.Callback,
             canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
             colors.setARGB(255,50,50,50);
             canvas.drawCircle(centerX, centerY, baseRadius, colors);
-            colors.setARGB(255,0,0,255);
+            colors.setARGB(255,198,0,0);
             canvas.drawCircle(x, y, hatRadius, colors);
             getHolder().unlockCanvasAndPost(canvas);
         }
@@ -117,8 +117,11 @@ public class JoystickView extends SurfaceView implements SurfaceHolder.Callback,
                             (contraintY-centerY)/baseRadius, getId());
                 }
             }
-            else
+            else{
                 drawJoystick(centerX, centerY);
+                joystickCallback.onJoystickMoved(0,
+                        0, getId());
+            }
         }
 
         return true;

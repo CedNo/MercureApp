@@ -2,6 +2,7 @@ package com.mercure.app.ui.remote;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -26,7 +27,7 @@ public class RemoteFragment extends Fragment
 
     Context context;
 
-    Button btStop, btAvancer, btAvDroit, btArDroit, btReculer, btAvGauche, btArGauche;
+    Button btStop;
     Switch startAutoMode, startVideo;
     VideoView carVideo;
     MainActivity mainActivity;
@@ -64,12 +65,6 @@ public class RemoteFragment extends Fragment
         mainActivity = (MainActivity)getActivity();
 
         btStop        = view.findViewById(R.id.btStop);
-        btAvancer     = view.findViewById(R.id.btAvancer);
-        btAvDroit     = view.findViewById(R.id.btAvDroit);
-        btAvGauche    = view.findViewById(R.id.btAvGauche);
-        btArDroit     = view.findViewById(R.id.btArDroit);
-        btArGauche    = view.findViewById(R.id.btArGauche);
-        btReculer     = view.findViewById(R.id.btReculer);
         startAutoMode = view.findViewById(R.id.startAutoMode);
         startVideo    = view.findViewById(R.id.startVideo);
         carVideo      = view.findViewById(R.id.carVideo);
@@ -81,20 +76,9 @@ public class RemoteFragment extends Fragment
             {
                 if(startAutoMode.isChecked())
                 {
-                    btAvancer.setVisibility(View.INVISIBLE);
-                    btAvDroit.setVisibility(View.INVISIBLE);
-                    btAvGauche.setVisibility(View.INVISIBLE);
-                    btArDroit.setVisibility(View.INVISIBLE);
-                    btArGauche.setVisibility(View.INVISIBLE);
-                    btReculer.setVisibility(View.INVISIBLE);
+
                 }
                 else {
-                    btAvancer.setVisibility(View.VISIBLE);
-                    btAvDroit.setVisibility(View.VISIBLE);
-                    btAvGauche.setVisibility(View.VISIBLE);
-                    btArDroit.setVisibility(View.VISIBLE);
-                    btArGauche.setVisibility(View.VISIBLE);
-                    btReculer.setVisibility(View.VISIBLE);
 
                     stop();
                 }
@@ -112,108 +96,6 @@ public class RemoteFragment extends Fragment
                 else{
                     carVideo.stopPlayback();
                 }
-            }
-        });
-        btAvancer.setOnTouchListener(new View.OnTouchListener()
-        {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent)
-            {
-                if(motionEvent.getAction() == MotionEvent.ACTION_DOWN)
-                {
-                    mainActivity.publishing("move", "avancer");
-                }
-                else if(motionEvent.getAction() == MotionEvent.ACTION_UP)
-                {
-                    stop();
-                }
-
-                return false;
-            }
-        });
-        btAvDroit.setOnTouchListener(new View.OnTouchListener()
-        {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent)
-            {
-                if(motionEvent.getAction() == MotionEvent.ACTION_DOWN)
-                {
-                    mainActivity.publishing("move", "avDroit");
-                }
-                else if(motionEvent.getAction() == MotionEvent.ACTION_UP)
-                {
-                    stop();
-                }
-
-                return false;
-            }
-        });
-        btAvGauche.setOnTouchListener(new View.OnTouchListener()
-        {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent)
-            {
-                if(motionEvent.getAction() == MotionEvent.ACTION_DOWN)
-                {
-                    mainActivity.publishing("move", "avGauche");
-                }
-                else if(motionEvent.getAction() == MotionEvent.ACTION_UP)
-                {
-                    stop();
-                }
-
-                return false;
-            }
-        });
-        btArGauche.setOnTouchListener(new View.OnTouchListener()
-        {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent)
-            {
-                if(motionEvent.getAction() == MotionEvent.ACTION_DOWN)
-                {
-                    mainActivity.publishing("move", "arGauche");
-                }
-                else if(motionEvent.getAction() == MotionEvent.ACTION_UP)
-                {
-                    stop();
-                }
-
-                return false;
-            }
-        });
-        btArDroit.setOnTouchListener(new View.OnTouchListener()
-        {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent)
-            {
-                if(motionEvent.getAction() == MotionEvent.ACTION_DOWN)
-                {
-                    mainActivity.publishing("move", "arDroit");
-                }
-                else if(motionEvent.getAction() == MotionEvent.ACTION_UP)
-                {
-                    stop();
-                }
-
-                return false;
-            }
-        });
-        btReculer.setOnTouchListener(new View.OnTouchListener()
-        {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent)
-            {
-                if(motionEvent.getAction() == MotionEvent.ACTION_DOWN)
-                {
-                    mainActivity.publishing("move", "reculer");
-                }
-                else if(motionEvent.getAction() == MotionEvent.ACTION_UP)
-                {
-                    stop();
-                }
-
-                return false;
             }
         });
         btStop.setOnClickListener(new View.OnClickListener()

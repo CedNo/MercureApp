@@ -6,89 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/frameConnecting"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#8000A6FF"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="@android:style/Widget.Material.ProgressBar"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="224dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tvConnecting"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="@string/en_attente_de_connexion"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/progressBar" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/frameConnectionFailed"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#80FF3636"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="224dp"
-            android:src="@drawable/ic_baseline_error_24"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tvConnectionFailed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="@string/connexion_fail"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-        <ImageView
-            android:id="@+id/btHomeRefreshConnection"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="9dp"
-            android:src="@drawable/ic_refresh_white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvConnectionFailed" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
     <LinearLayout
+        android:id="@+id/infos_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="visible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layoutAuto"
@@ -128,9 +51,9 @@
                     android:paddingRight="20dp"
                     android:paddingBottom="20dp"
                     app:gaugeEndValue="90"
-                    app:gaugePointEndColor="@color/main_blue"
+                    app:gaugePointEndColor="@color/main_grey"
                     app:gaugePointSize="6"
-                    app:gaugePointStartColor="@color/main_blue"
+                    app:gaugePointStartColor="@color/main_grey"
                     app:gaugeStartAngle="90"
                     app:gaugeStartValue="-90"
                     app:gaugeStrokeCap="ROUND"
@@ -164,9 +87,9 @@
                     android:paddingRight="20dp"
                     android:paddingBottom="20dp"
                     app:gaugeEndValue="-90"
-                    app:gaugePointEndColor="@color/main_blue"
+                    app:gaugePointEndColor="@color/main_grey"
                     app:gaugePointSize="6"
-                    app:gaugePointStartColor="@color/main_blue"
+                    app:gaugePointStartColor="@color/main_grey"
                     app:gaugeStartAngle="180"
                     app:gaugeStartValue="90"
                     app:gaugeStrokeCap="ROUND"
@@ -218,8 +141,8 @@
                 android:paddingRight="10dp"
                 android:paddingBottom="10dp"
                 app:gaugeEndValue="20"
-                app:gaugePointEndColor="@color/main_blue"
-                app:gaugePointStartColor="@color/main_blue"
+                app:gaugePointEndColor="@color/main_grey"
+                app:gaugePointStartColor="@color/main_grey"
                 app:gaugeStartAngle="135"
                 app:gaugeStartValue="0"
                 app:gaugeStrokeCap="ROUND"

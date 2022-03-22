@@ -68,6 +68,9 @@ public class SettingsFragment extends Fragment {
                 hideSoftKeyboard((MainActivity) getActivity());
             }
         });
+
+        MainActivity.frameConnecting.setTranslationZ(-10);
+        MainActivity.frameConnectionFailed.setTranslationZ(-10);
     }
 
     public void saveSettings(View view) {

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static ConstraintLayout frameConnecting;
     public static ConstraintLayout frameConnectionFailed;
+    ImageView btHomeRefreshConnection;
     private ActivityMainBinding binding;
     Context context;
 
@@ -70,6 +72,10 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
+        frameConnecting = findViewById(R.id.frameConnecting);
+        frameConnectionFailed = findViewById(R.id.frameConnectionFailed);
+        btHomeRefreshConnection = findViewById(R.id.btHomeRefreshConnection);
+        btHomeRefreshConnection.setOnClickListener(this::refreshConnection);
         isConnected = false;
 
         SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
@@ -77,12 +83,7 @@ public class MainActivity extends AppCompatActivity {
         address = sharedPref.getString("adresseMQTT", defaultValue);
 
         clientId = MqttClient.generateClientId();
-
-        Log.d("[CHECK STATUS]", isConnected.toString());
-
-        if(!isConnected) {
-            connect();
-        }
+        connect();
     }
 
     public void setClientCallbacks() {
@@ -96,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
             public void messageArrived(String topic, MqttMessage message) throws Exception {
                 Log.d("[MESSAGE]", new String(message.getPayload()));
 
-//              TODO FIX THE SETTING OF VALUES
+//              TODO FIX L'AFFICHAGE DES ANGLES (INVERSER)
                 switch (topic) {
                     case "accel": {
                         String[] m = new String(message.getPayload()).split("@", 4);
@@ -168,6 +169,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void connect(){
         Log.d("[CONNECTING]", "CALLING MainActivity.connect()...");
+        frameConnecting.setVisibility(View.VISIBLE);
+        frameConnectionFailed.setVisibility(View.GONE);
         client = new MqttAndroidClient(context, address, clientId);
         try {
             IMqttToken token = client.connect();
@@ -227,5 +230,10 @@ public class MainActivity extends AppCompatActivity {
 
     public static void setAddress(String address) {
         MainActivity.address = address;
+    }
+
+
+    public void refreshConnection(View view) {
+        connect();
     }
 }

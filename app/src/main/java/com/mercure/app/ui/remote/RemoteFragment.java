@@ -224,6 +224,9 @@ public class RemoteFragment extends Fragment
                 stop();
             }
         });
+
+        MainActivity.frameConnecting.setTranslationZ(45);
+        MainActivity.frameConnectionFailed.setTranslationZ(45);
     }
 
     private void trajetAuto()

@@ -1,7 +1,11 @@
 package com.mercure.app.ui.home;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,9 +59,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         context = view.getContext();
-        MainActivity.frameConnecting = view.findViewById(R.id.frameConnecting);
-        MainActivity.frameConnectionFailed = view.findViewById(R.id.frameConnectionFailed);
-        btHomeRefreshConnection = view.findViewById(R.id.btHomeRefreshConnection);
         displaySpeed = view.findViewById(R.id.displaySpeed);
         displayAngleFace = view.findViewById(R.id.displayAngleFace);
         displayAngleLateral = view.findViewById(R.id.displayAngleLateral);
@@ -66,15 +67,9 @@ public class HomeFragment extends Fragment {
         displayAngleFace.setValue(90);
         displayAngleLateral.setValue(90);
 
-        btHomeRefreshConnection.setOnClickListener(this::refreshConnection);
-
-        if(MainActivity.isConnected) {
-            MainActivity.frameConnecting.setVisibility(View.GONE);
-            MainActivity.frameConnectionFailed.setVisibility(View.GONE);
-        }
-        else {
-            refreshConnection(view);
-            MainActivity.frameConnecting.setVisibility(View.VISIBLE);
+        if(!MainActivity.isConnected) {
+            MainActivity.frameConnecting.setTranslationZ(45);
+            MainActivity.frameConnectionFailed.setTranslationZ(45);
         }
     }
 

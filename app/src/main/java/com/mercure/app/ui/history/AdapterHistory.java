@@ -46,10 +46,25 @@ public class AdapterHistory extends RecyclerView.Adapter<AdapterHistory.MonViewH
     HistoryViewModel trajetViewModel;
     List<Integer> colors;
 
-    public AdapterHistory(List<Trajet> liste, Context mainContext, HistoryViewModel trajetViewModel) {
+    int maxObstacles;
+    int maxDuree;
+    int maxAngleY;
+    int maxAngleX;
+    int maxDistance;
+    int maxVitesseMoy;
+    int maxVitesseMax;
+
+    public AdapterHistory(List<Trajet> liste, Context mainContext, HistoryViewModel trajetViewModel, int maxObstacles, int maxDuree, int maxAngleY, int maxAngleX, int maxDistance, int maxVitesseMoy, int maxVitesseMax) {
         this.liste = liste;
         this.mainContext = mainContext;
         this.trajetViewModel = trajetViewModel;
+        this.maxObstacles = maxObstacles;
+        this.maxDuree = maxDuree;
+        this.maxAngleY = maxAngleY;
+        this.maxAngleX = maxAngleX;
+        this.maxDistance = maxDistance;
+        this.maxVitesseMoy = maxVitesseMoy;
+        this.maxVitesseMax = maxVitesseMax;
         initiateColors();
     }
 
@@ -119,6 +134,13 @@ public class AdapterHistory extends RecyclerView.Adapter<AdapterHistory.MonViewH
                 Bundle bundle = new Bundle();
                 Trajet trajet = trajetViewModel.getTrajets().getValue().get(pos);
                 bundle.putSerializable("trajet", trajet);
+                bundle.putInt("maxObstacles", maxObstacles);
+                bundle.putInt("maxDuree", maxDuree);
+                bundle.putInt("maxAngleX", maxAngleX);
+                bundle.putInt("maxAngleY", maxAngleY);
+                bundle.putInt("maxDistance", maxDistance);
+                bundle.putInt("maxVitesseMoy", maxVitesseMoy);
+                bundle.putInt("maxVitesseMax", maxVitesseMax);
 
                 Navigation.findNavController(view).navigate(R.id.action_navigation_history_to_navigation_infos_trajet, bundle);
             }

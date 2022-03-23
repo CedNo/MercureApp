@@ -18,6 +18,9 @@ import com.mercure.app.MainActivity;
 import com.mercure.app.R;
 import com.mercure.app.Trajet;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.List;
 
 public class InfosTrajetFragment extends Fragment {
@@ -46,19 +49,24 @@ public class InfosTrajetFragment extends Fragment {
         TextView tvDate = view.findViewById(R.id.tv_infos_date);
         TextView tvDuree = view.findViewById(R.id.tv_infos_duree);
         TextView tvDistance = view.findViewById(R.id.tv_infos_distance);
-        TextView tvVitesseMoyenne = view.findViewById(R.id.tv_infos_vitesseMoyenne);
-        TextView tvVitesseMax = view.findViewById(R.id.tv_infos_vitesseMax);
-        TextView tvAngleMaxY = view.findViewById(R.id.tv_infos_angleMaxY);
-        TextView tvAngleMaxX = view.findViewById(R.id.tv_infos_angleMaxX);
+        TextView tvVitesseMoyenne = view.findViewById(R.id.tv_infos_vitesse_moy);
+        TextView tvVitesseMax = view.findViewById(R.id.tv_infos_vitesse_max);
+        TextView tvAngleMaxY = view.findViewById(R.id.tv_infos_angleY_max);
+        TextView tvAngleMaxX = view.findViewById(R.id.tv_infos_angleX_max);
         TextView tvObstacles = view.findViewById(R.id.tv_infos_obstacles);
 
-        tvDate.setText(trajet.getDateTime().toString());
-        tvDuree.setText(trajet.getTemps() + "");
-        tvDistance.setText(trajet.getDistance() + "");
-        tvVitesseMoyenne.setText(trajet.getVitesseMoy() + "");
-        tvVitesseMax.setText(trajet.getVitesseMax() + "");
-        tvAngleMaxY.setText(trajet.getAngleYmax() + "");
-        tvAngleMaxX.setText(trajet.getAngleXmax() + "");
+        DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime dateTrajet = LocalDateTime.parse(trajet.getDateTime(), f);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, MMM dd, yyyy HH:mm:ss a");
+        String txtDate = dateTrajet.format(formatter);
+
+        tvDate.setText(txtDate);
+        tvDuree.setText(trajet.getTemps() + " s");
+        tvDistance.setText(trajet.getDistance() + " m");
+        tvVitesseMoyenne.setText(trajet.getVitesseMoy() + " km/h");
+        tvVitesseMax.setText(trajet.getVitesseMax() + " km/h");
+        tvAngleMaxY.setText(trajet.getAngleYmax() + "°");
+        tvAngleMaxX.setText(trajet.getAngleXmax() + "°");
         tvObstacles.setText(trajet.getObstacles() + "");
     }
 }

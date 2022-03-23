@@ -4,11 +4,13 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +25,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.mercure.app.databinding.ActivityMainBinding;
 import com.mercure.app.ui.home.HomeFragment;
+import com.mercure.app.ui.remote.JoystickView;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
@@ -37,10 +40,11 @@ import java.util.Arrays;
 
 import pl.pawelkleczkowski.customgauge.CustomGauge;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements JoystickView.JoystickListener {
 
     public static ConstraintLayout frameConnecting;
     public static ConstraintLayout frameConnectionFailed;
+    ImageView btHomeRefreshConnection;
     private ActivityMainBinding binding;
     Context context;
 
@@ -49,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static String address;
     public static Boolean isConnected;
+    public static String mouvement;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,19 +74,19 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
+        frameConnecting = findViewById(R.id.frameConnecting);
+        frameConnectionFailed = findViewById(R.id.frameConnectionFailed);
+        btHomeRefreshConnection = findViewById(R.id.btHomeRefreshConnection);
+        btHomeRefreshConnection.setOnClickListener(this::refreshConnection);
         isConnected = false;
+        mouvement = "stop";
 
         SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
         String defaultValue = "tcp://172.16.207.54:1883";
         address = sharedPref.getString("adresseMQTT", defaultValue);
 
         clientId = MqttClient.generateClientId();
-
-        Log.d("[CHECK STATUS]", isConnected.toString());
-
-        if(!isConnected) {
-            connect();
-        }
+        connect();
     }
 
     public void setClientCallbacks() {
@@ -95,14 +100,14 @@ public class MainActivity extends AppCompatActivity {
             public void messageArrived(String topic, MqttMessage message) throws Exception {
                 Log.d("[MESSAGE]", new String(message.getPayload()));
 
-//              TODO FIX THE SETTING OF VALUES
+//              TODO FIX L'AFFICHAGE DES ANGLES (INVERSER)
                 switch (topic) {
                     case "accel": {
                         String[] m = new String(message.getPayload()).split("@", 4);
                         double d0 = Double.parseDouble(m[0]);
                         int i = (int) Math.abs(d0);
                         Log.d("[VITESSE]", Math.abs(i) + "");
-                        String txt0 = i + " m/s";
+                        String txt0 = i + " km/h";
                         ((CustomGauge) findViewById(R.id.displaySpeed)).setValue(i);
                         ((TextView) findViewById(R.id.tvSpeed)).setText(txt0);
 
@@ -149,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
         try
         {
             client.publish(topic, message.getBytes(),0,false);
-            Toast.makeText(this,"Published Message",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Tu as publié " + message,Toast.LENGTH_SHORT).show();
         } catch ( MqttException e)
         {
             e.printStackTrace();
@@ -159,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
     private void setSubscription(){
         try{
             client.subscribe("accel",0);
+            client.subscribe("video",0);
         }catch (MqttException e){
             e.printStackTrace();
         }
@@ -166,6 +172,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void connect(){
         Log.d("[CONNECTING]", "CALLING MainActivity.connect()...");
+        frameConnecting.setVisibility(View.VISIBLE);
+        frameConnectionFailed.setVisibility(View.GONE);
         client = new MqttAndroidClient(context, address, clientId);
         try {
             IMqttToken token = client.connect();
@@ -225,5 +233,54 @@ public class MainActivity extends AppCompatActivity {
 
     public static void setAddress(String address) {
         MainActivity.address = address;
+    }
+
+
+    public void refreshConnection(View view) {
+        connect();
+    }
+
+    @Override
+    public void onJoystickMoved(float xPercent, float yPercent, int id)
+    {
+        Log.d("Joystick", " X percent : " + xPercent + " Y percent : " + yPercent);
+
+        if(xPercent == 0.0 && yPercent == 0.0)
+        {
+            publishing("move", "stop");
+            mouvement = "stop";
+        }
+        // Avancer
+        else if((xPercent >= -0.3 && xPercent <= 0.3) && yPercent < -0 && mouvement != "av")
+        {
+            publishing("move", "avancer");
+            mouvement = "av";
+        }
+        else if((xPercent >= -0.9 && xPercent <= -0.3) && yPercent < 0 && mouvement != "avg" )
+        {
+            publishing("move", "avGauche");
+            mouvement = "avg";
+        }
+        else if((xPercent >= 0.3 && xPercent <=0.9) && yPercent < 0 && mouvement != "avd" )
+        {
+            publishing("move", "avDroit");
+            mouvement = "avd";
+        }
+        // Reculer
+        else if((xPercent >= -0.3 && xPercent <= 0.3) && yPercent > 0 && mouvement != "ar" )
+        {
+            publishing("move", "reculer");
+            mouvement = "ar";
+        }
+        else if((xPercent >= -0.9 && xPercent <= -0.3) && yPercent > 0 && mouvement != "arg" )
+        {
+            publishing("move", "arGauche");
+            mouvement = "arg";
+        }
+        else if((xPercent >= 0.3 && xPercent <=0.9) && yPercent > 0 && mouvement != "ard")
+        {
+            publishing("move", "arDroit");
+            mouvement = "ard";
+        }
     }
 }

@@ -4,7 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.remote.RemoteFragment">
+
+    <Button
+        android:id="@+id/btReculer"
+        android:layout_width="92dp"
+        android:layout_height="97dp"
+        android:backgroundTint="@android:color/holo_green_dark"
+        android:elevation="5dp"
+        android:rotation="180"
+        android:visibility="invisible"
+        app:cornerRadius="100dp"
+        app:icon="@drawable/arrow_forward"
+        app:iconGravity="textTop"
+        app:iconSize="70dp"
+        app:iconTint="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/btStop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btAvancer"
+        app:layout_constraintVertical_bias="0.929"
+        app:strokeColor="#040303"
+        app:strokeWidth="2dp"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <Switch
         android:id="@+id/startVideo"
@@ -17,99 +41,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TouchTargetSizeCheck" />
-
-    <ImageButton
-        android:id="@+id/btAvancer"
-        style="@android:style/Widget.ImageButton"
-        android:layout_width="128dp"
-        android:layout_height="116dp"
-        android:layout_marginTop="28dp"
-        android:backgroundTint="#FFFF"
-        android:rotation="90"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_left_turn"
-        app:layout_constraintEnd_toStartOf="@+id/btAvDroit"
-        app:layout_constraintHorizontal_bias="0.512"
-        app:layout_constraintStart_toEndOf="@+id/btAvGauche"
-        app:layout_constraintTop_toBottomOf="@+id/carVideo"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <ImageButton
-        android:id="@+id/btAvDroit"
-        style="@android:style/Widget.ImageButton"
-        android:layout_width="105dp"
-        android:layout_height="98dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="#FFFF"
-        android:rotation="135"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_left_turn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/carVideo"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <ImageButton
-        android:id="@+id/btArDroit"
-        style="@android:style/Widget.ImageButton"
-        android:layout_width="105dp"
-        android:layout_height="98dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="#FFFF"
-        android:rotation="225"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_left_turn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btAvDroit"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <ImageButton
-        android:id="@+id/btReculer"
-        style="@android:style/Widget.ImageButton"
-        android:layout_width="128dp"
-        android:layout_height="116dp"
-        android:backgroundTint="#FFFF"
-        android:rotation="270"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_left_turn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btArDroit"
-        app:layout_constraintHorizontal_bias="0.512"
-        app:layout_constraintStart_toEndOf="@+id/btArGauche"
-        app:layout_constraintTop_toBottomOf="@+id/btAvancer"
-        app:layout_constraintVertical_bias="0.512"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <ImageButton
-        android:id="@+id/btArGauche"
-        style="@android:style/Widget.ImageButton"
-        android:layout_width="105dp"
-        android:layout_height="98dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="#FFFF"
-        android:rotation="315"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_left_turn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btAvGauche"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <ImageButton
-        android:id="@+id/btAvGauche"
-        style="@android:style/Widget.ImageButton"
-        android:layout_width="105dp"
-        android:layout_height="98dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="64dp"
-        android:backgroundTint="#FFFF"
-        android:rotation="45"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_left_turn"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/carVideo"
-        tools:ignore="SpeakableTextPresentCheck" />
 
     <Switch
         android:id="@+id/startAutoMode"
@@ -127,23 +58,139 @@
         android:id="@+id/carVideo"
         android:layout_width="376dp"
         android:layout_height="197dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.542"
+        app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/startAutoMode" />
+        app:layout_constraintTop_toBottomOf="@+id/startVideo" />
 
     <Button
         android:id="@+id/btStop"
         android:layout_width="239dp"
         android:layout_height="59dp"
+        android:layout_marginBottom="4dp"
         android:backgroundTint="#C60000"
+        android:elevation="5dp"
         android:text="Stop"
+        app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btAvancer"
+        android:layout_width="97dp"
+        android:layout_height="97dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@android:color/holo_green_dark"
+        android:elevation="5dp"
+        android:visibility="invisible"
+        app:cornerRadius="100dp"
+        app:icon="@drawable/arrow_forward"
+        app:iconGravity="textTop"
+        app:iconSize="70dp"
+        app:iconTint="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btReculer"
-        app:layout_constraintVertical_bias="0.609" />
+        app:layout_constraintTop_toBottomOf="@+id/carVideo"
+        app:strokeColor="#040303"
+        app:strokeWidth="2dp"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <Button
+        android:id="@+id/btAvDroit"
+        android:layout_width="81dp"
+        android:layout_height="86dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="40dp"
+        android:backgroundTint="@android:color/holo_green_dark"
+        android:elevation="5dp"
+        android:rotation="45"
+        android:visibility="invisible"
+        app:cornerRadius="100dp"
+        app:icon="@drawable/arrow_forward"
+        app:iconGravity="textTop"
+        app:iconSize="55dp"
+        app:iconTint="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/carVideo"
+        app:strokeColor="#040303"
+        app:strokeWidth="1.5dp"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <Button
+        android:id="@+id/btAvGauche"
+        android:layout_width="81dp"
+        android:layout_height="86dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="64dp"
+        android:backgroundTint="@android:color/holo_green_dark"
+        android:elevation="5dp"
+        android:rotation="315"
+        android:visibility="invisible"
+        app:cornerRadius="100dp"
+        app:icon="@drawable/arrow_forward"
+        app:iconGravity="textTop"
+        app:iconSize="55dp"
+        app:iconTint="#000000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/carVideo"
+        app:strokeColor="#040303"
+        app:strokeWidth="1.5dp"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <Button
+        android:id="@+id/btArDroit"
+        android:layout_width="81dp"
+        android:layout_height="86dp"
+        android:layout_marginEnd="40dp"
+        android:backgroundTint="@android:color/holo_green_dark"
+        android:elevation="5dp"
+        android:rotation="135"
+        android:visibility="invisible"
+        app:cornerRadius="100dp"
+        app:icon="@drawable/arrow_forward"
+        app:iconGravity="textTop"
+        app:iconSize="55dp"
+        app:iconTint="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/btStop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btAvDroit"
+        app:layout_constraintVertical_bias="0.238"
+        app:strokeColor="#040303"
+        app:strokeWidth="1.5dp"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <Button
+        android:id="@+id/btArGauche"
+        android:layout_width="81dp"
+        android:layout_height="86dp"
+        android:layout_marginStart="40dp"
+        android:backgroundTint="@android:color/holo_green_dark"
+        android:elevation="5dp"
+        android:rotation="225"
+        android:visibility="invisible"
+        app:cornerRadius="100dp"
+        app:icon="@drawable/arrow_forward"
+        app:iconGravity="textTop"
+        app:iconSize="55dp"
+        app:iconTint="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/btStop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btAvGauche"
+        app:layout_constraintVertical_bias="0.238"
+        app:strokeColor="#040303"
+        app:strokeWidth="1.5dp"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <com.mercure.app.ui.remote.JoystickView
+        android:id="@+id/joystick"
+        android:layout_width="376dp"
+        android:layout_height="307dp"
+        app:layout_constraintBottom_toTopOf="@+id/btStop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/carVideo"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,4 +8,11 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="en_attente_de_connexion">En attente de connexion</string>
     <string name="connexion_fail">Connexion échoué</string>
+    <string name="duree">Durée</string>
+    <string name="distance">Distance</string>
+    <string name="vitesse_moy">Vitesse moyenne</string>
+    <string name="vitesse_max">Vitesse maximale</string>
+    <string name="angle_y_max">Angle avant max</string>
+    <string name="angle_x_max">Angle côté max</string>
+    <string name="obstacles">Nombre d\'obstacles</string>
 </resources>

@@ -1,19 +1,64 @@
 package com.mercure.app.ui.history;
 
+import android.util.Log;
+import android.widget.Toast;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.google.android.material.snackbar.Snackbar;
+import com.mercure.app.InterfaceServeur;
+import com.mercure.app.RetrofitInstance;
+import com.mercure.app.Trajet;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class HistoryViewModel extends ViewModel {
 
-    private MutableLiveData<String> mText;
+    private static MutableLiveData<List<Trajet>> trajetsLiveData;
 
-    public HistoryViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is notifications fragment");
+    public LiveData<List<Trajet>> getTrajets() {
+        if (trajetsLiveData == null) {
+            List<Trajet> list = new ArrayList<Trajet>();
+            trajetsLiveData = new MutableLiveData<List<Trajet>>();
+            trajetsLiveData.setValue(list);
+            genererListe();
+            Log.d("[LISTE]", "LISTE GENERER -> " + trajetsLiveData.getValue());
+        }
+        return trajetsLiveData;
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public void addTrajet(final Trajet trajet) {
+        List<Trajet> currentTrajets = trajetsLiveData.getValue();
+        if (currentTrajets != null) {
+            currentTrajets.add(trajet);
+        }
+        trajetsLiveData.postValue(currentTrajets);
+    }
+
+    public void genererListe() {
+        InterfaceServeur serveur = RetrofitInstance.getInstance().create(InterfaceServeur.class);
+        Call<List<Trajet>> call = serveur.getTrajets();
+
+        call.enqueue(new Callback<List<Trajet>>() {
+            @Override
+            public void onResponse(Call<List<Trajet>> call, Response<List<Trajet>> response) {
+                trajetsLiveData.postValue(response.body());
+                Log.d("[LISTE]", ".COM -> " + response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<Trajet>> call, Throwable t) {
+                Log.d("[LISTE]", "" + t);
+                // TODO MESSAGE D'ERREUR DE FETCH DES TRAJETS
+            }
+        });
     }
 }

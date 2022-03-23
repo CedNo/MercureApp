@@ -19,9 +19,23 @@
     <fragment
         android:id="@+id/navigation_history"
         android:name="com.mercure.app.ui.history.HistoryFragment"
-        tools:layout="@layout/fragment_history" />
+        tools:layout="@layout/fragment_history" >
+        <action
+            android:id="@+id/action_navigation_history_to_navigation_infos_trajet"
+            app:destination="@id/navigation_infos_trajet"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popUpTo="@id/navigation_history"
+            app:popUpToInclusive="false" />
+    </fragment>
+
     <fragment
         android:id="@+id/navigation_settings"
         android:name="com.mercure.app.ui.settings.SettingsFragment"
         tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/navigation_infos_trajet"
+        android:name="com.mercure.app.ui.history.InfosTrajetFragment"
+        tools:layout="@layout/infos_trajet_fragment"/>
 </navigation>

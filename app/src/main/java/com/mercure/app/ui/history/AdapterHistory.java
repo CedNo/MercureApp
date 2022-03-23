@@ -22,6 +22,7 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -118,12 +119,8 @@ public class AdapterHistory extends RecyclerView.Adapter<AdapterHistory.MonViewH
                 Bundle bundle = new Bundle();
                 Trajet trajet = trajetViewModel.getTrajets().getValue().get(pos);
                 bundle.putSerializable("trajet", trajet);
-                infosFrag.setArguments(bundle);
 
-                activity.getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.nav_host_fragment_activity_main, infosFrag, "infosFragment")
-                        .addToBackStack(null)
-                        .commit();
+                Navigation.findNavController(view).navigate(R.id.action_navigation_history_to_navigation_infos_trajet, bundle);
             }
         });
     }
@@ -151,10 +148,7 @@ public class AdapterHistory extends RecyclerView.Adapter<AdapterHistory.MonViewH
     private void initiateColors() {
         colors = new ArrayList<Integer>();
         colors.add(ResourcesCompat.getColor(mainContext.getResources(), R.color.trajets_red1, null));
-        colors.add(ResourcesCompat.getColor(mainContext.getResources(), R.color.trajets_red2, null));
-        colors.add(ResourcesCompat.getColor(mainContext.getResources(), R.color.trajets_grey1, null));
-        colors.add(ResourcesCompat.getColor(mainContext.getResources(), R.color.trajets_grey2, null));
-        colors.add(ResourcesCompat.getColor(mainContext.getResources(), R.color.trajets_black, null));
         colors.add(ResourcesCompat.getColor(mainContext.getResources(), R.color.trajets_white, null));
+        colors.add(ResourcesCompat.getColor(mainContext.getResources(), R.color.trajets_black, null));
     }
 }

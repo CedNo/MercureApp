@@ -15,10 +15,13 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import com.mercure.app.MainActivity;
 import com.mercure.app.R;
 import com.mercure.app.Trajet;
+import com.mercure.app.TrajetDAO;
+import com.mercure.app.TrajetsDB;
 import com.mercure.app.databinding.FragmentHistoryBinding;
 
 import java.util.List;
@@ -30,6 +33,9 @@ public class HistoryFragment extends Fragment {
 
     RecyclerView rvListe;
     AdapterHistory adapterListe;
+
+    TrajetsDB tdb;
+    public static TrajetDAO tdao;
 
     Context context;
 
@@ -44,6 +50,12 @@ public class HistoryFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         context = view.getContext();
+
+        tdb = Room.databaseBuilder(context, TrajetsDB.class, "TrajetsDB")
+                .allowMainThreadQueries()
+                .build();
+
+        tdao = tdb.tdao();
 
         historyViewModel.getTrajets().observe(getViewLifecycleOwner(), trajetsObserver);
 

@@ -59,4 +59,10 @@ dependencies {
 
     //Gauges
     implementation 'pl.pawelkleczkowski.customgauge:CustomGauge:1.0.4'
+
+    //ROOM
+    def room_version = "2.3.0"
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+
 }

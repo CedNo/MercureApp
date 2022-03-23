@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements JoystickView.Joys
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        getSupportActionBar().hide();
         context = getApplicationContext();
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());

@@ -71,6 +71,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="100dp"
-        android:backgroundTint="@color/main_grey"
+        android:backgroundTint="@color/main_red"
         android:text="Sauvegarder" />
 </LinearLayout>

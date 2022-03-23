@@ -22,11 +22,10 @@
         android:layout_height="75dp"
         android:layout_margin="5dp"
         android:translationZ="45dp"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/imageView12">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -82,10 +81,10 @@
         android:layout_height="75dp"
         android:layout_margin="5dp"
         android:translationZ="45dp"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/imageView12">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"

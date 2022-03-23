@@ -118,7 +118,6 @@ public class MainActivity extends AppCompatActivity implements JoystickView.Joys
                         String txt1 = Math.abs(y) + "°";
                         ((CustomGauge) findViewById(R.id.displayAngleFace)).setValue(y);
                         ((TextView) findViewById(R.id.tvAngleFace)).setText(txt1);
-                        ((ImageView) findViewById(R.id.imgJeepStats)).setRotationX(-y);
 
                         double d2 = Double.parseDouble(m[2]);
                         int x = (int) (d2 * 90);

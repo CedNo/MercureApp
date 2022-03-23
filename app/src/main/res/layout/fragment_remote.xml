@@ -69,7 +69,7 @@
         android:layout_width="239dp"
         android:layout_height="59dp"
         android:layout_marginBottom="4dp"
-        android:backgroundTint="#C60000"
+        android:backgroundTint="@color/main_red"
         android:elevation="5dp"
         android:text="Stop"
         app:cornerRadius="10dp"

@@ -12,13 +12,13 @@ import java.util.List;
 @Dao
 public interface TrajetDAO {
 
-    @Query("SELECT * FROM trajets")
+    @Query("SELECT * FROM trajets ORDER BY id")
     public Trajet[] getTrajets();
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     public void ajouterPlusieursTrajets(List<Trajet> trajets);
 
-    @Query("SELECT * FROM trajets LIMIT 1")
+    @Query("SELECT * FROM trajets ORDER BY ID DESC LIMIT 1")
     public Trajet getLastTrajet();
 
     @Query("SELECT COUNT(*) FROM trajets")

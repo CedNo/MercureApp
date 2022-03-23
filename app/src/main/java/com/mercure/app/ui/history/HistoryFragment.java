@@ -55,7 +55,8 @@ public class HistoryFragment extends Fragment {
                 .allowMainThreadQueries()
                 .build();
 
-        tdao = tdb.tdao();
+        if(tdao == null)
+            tdao = tdb.tdao();
 
         historyViewModel.getTrajets().observe(getViewLifecycleOwner(), trajetsObserver);
 

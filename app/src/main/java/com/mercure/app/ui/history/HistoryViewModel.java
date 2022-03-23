@@ -1,25 +1,21 @@
 package com.mercure.app.ui.history;
 
-import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import androidx.room.Room;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.mercure.app.InterfaceServeur;
 import com.mercure.app.RetrofitInstance;
 import com.mercure.app.Trajet;
 import com.mercure.app.TrajetDAO;
-import com.mercure.app.TrajetsDB;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -57,6 +53,11 @@ public class HistoryViewModel extends ViewModel {
 
         tdao = HistoryFragment.tdao;
 
+        List<Trajet> t = Arrays.asList(tdao.getTrajets());
+        Collections.reverse(t);
+
+        trajetsLiveData.postValue(t);
+
         call.enqueue(new Callback<List<Trajet>>() {
             @Override
             public void onResponse(Call<List<Trajet>> call, Response<List<Trajet>> response) {
@@ -65,17 +66,18 @@ public class HistoryViewModel extends ViewModel {
                     LocalDateTime lastTimeRemoteDB = LocalDateTime.parse(response.body().get(0).getDateTime(), f);
                     LocalDateTime lastTimeLocalDB = LocalDateTime.parse(tdao.getLastTrajet().getDateTime(), f);
 
+                    Log.d("[DATA]", lastTimeLocalDB + " " + lastTimeRemoteDB);
+
                     if(lastTimeRemoteDB.isAfter(lastTimeLocalDB)){
                         tdao.deleteTrajets();
                         tdao.ajouterPlusieursTrajets(response.body());
                         trajetsLiveData.postValue(response.body());
                     }
                     else {
-                        trajetsLiveData.postValue(Arrays.asList(tdao.getTrajets()));
+                        trajetsLiveData.postValue(t);
                     }
                 }
                 else {
-                    tdao.deleteTrajets();
                     tdao.ajouterPlusieursTrajets(response.body());
                     trajetsLiveData.postValue(response.body());
                 }
@@ -88,5 +90,4 @@ public class HistoryViewModel extends ViewModel {
             }
         });
     }
-
 }

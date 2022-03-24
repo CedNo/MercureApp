@@ -151,13 +151,16 @@ public class MainActivity extends AppCompatActivity implements JoystickView.Joys
 
     public void publishing(String topic, String message)
     {
-        try
-        {
-            client.publish(topic, message.getBytes(),0,false);
-            Toast.makeText(this,"Tu as publié " + message,Toast.LENGTH_SHORT).show();
-        } catch ( MqttException e)
-        {
-            e.printStackTrace();
+        if(isConnected) {
+            try
+            {
+                Log.d("[MESSAGE]", topic);
+                client.publish(topic, message.getBytes(),0,false);
+                Toast.makeText(this,"Tu as publié " + message,Toast.LENGTH_SHORT).show();
+            } catch ( MqttException e)
+            {
+                e.printStackTrace();
+            }
         }
     }
 

@@ -10,10 +10,14 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ScrollView;
+import android.widget.Scroller;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,6 +41,7 @@ public class Activity_Cnx extends AppCompatActivity {
     List<Utilisateur> listeUtilisateurs;
     Context context;
     EditText txtUtilisateur, txtMdp;
+    ScrollView scrollView;
 
 
     @Override
@@ -46,6 +51,7 @@ public class Activity_Cnx extends AppCompatActivity {
         int transparent = Color.TRANSPARENT;
         txtUtilisateur = findViewById(R.id.txtUtilisateur);
         txtMdp = findViewById(R.id.txtMdp);
+        scrollView = findViewById(R.id.ScrollView);
 
         btn = (CircularProgressButton) findViewById(R.id.bt_cnx);
         Bitmap ic_error = drawableToBitmap(getResources().getDrawable(R.drawable.ic_error));
@@ -54,6 +60,8 @@ public class Activity_Cnx extends AppCompatActivity {
         context = this;
 
         serveur = RetrofitInstance.getInstance().create(InterfaceServeur.class);
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
 
 
@@ -84,16 +92,7 @@ public class Activity_Cnx extends AppCompatActivity {
                     public void run() {
                         if(verifChamp(txtUtilisateur.getText().toString().trim(), txtMdp.getText().toString().trim()))
                         {
-                            btn.doneLoadingAnimation(transparent, ic_error);
-
-                            Handler handler = new Handler();
-                            handler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    btn.revertAnimation();
-                                }
-                            }, 2000);
-
+                            btn.revertAnimation();
 
                         }
                         else {
@@ -119,6 +118,11 @@ public class Activity_Cnx extends AppCompatActivity {
 
             }
         });
+
+
+
+            //scrollView.scrollTo(0, (int) btn.getY());
+
 
     }
 

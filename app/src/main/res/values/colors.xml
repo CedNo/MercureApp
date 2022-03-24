@@ -11,7 +11,9 @@
     <color name="connexion_grey">#BFBFBF</color>
     <color name="connexion_red">#CF2E2E</color>
     <color name="main_grey">#535353</color>
+    <color name="main_grey2">#494949</color>
     <color name="main_red">#BD1313</color>
+    <color name="main_off_red">#C52222</color>
     <color name="main_red_dark">#B31212</color>
     <color name="gauge_grey">#DCDCDC</color>
     <color name="trajets_red1">#E82C2C</color>

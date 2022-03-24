@@ -59,8 +59,8 @@
 
 
     app:spinning_bar_width="4dp" <!-- Optional -->
-        app:spinning_bar_color="#FFF" <!-- Optional -->
-        app:spinning_bar_padding="6dp" <!-- Optional -->
+    app:spinning_bar_color="#FFF" <!-- Optional -->
+    app:spinning_bar_padding="6dp" <!-- Optional -->
 
 
     <br.com.simplepass.loadingbutton.customViews.CircularProgressButton

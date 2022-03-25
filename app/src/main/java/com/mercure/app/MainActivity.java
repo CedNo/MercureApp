@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements JoystickView.Joys
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        getSupportActionBar().hide();
         context = getApplicationContext();
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -117,7 +118,6 @@ public class MainActivity extends AppCompatActivity implements JoystickView.Joys
                         String txt1 = Math.abs(y) + "°";
                         ((CustomGauge) findViewById(R.id.displayAngleFace)).setValue(y);
                         ((TextView) findViewById(R.id.tvAngleFace)).setText(txt1);
-                        ((ImageView) findViewById(R.id.imgJeepStats)).setRotationX(-y);
 
                         double d2 = Double.parseDouble(m[2]);
                         int x = (int) (d2 * 90);
@@ -151,13 +151,16 @@ public class MainActivity extends AppCompatActivity implements JoystickView.Joys
 
     public void publishing(String topic, String message)
     {
-        try
-        {
-            client.publish(topic, message.getBytes(),0,false);
-            Toast.makeText(this,"Tu as publié " + message,Toast.LENGTH_SHORT).show();
-        } catch ( MqttException e)
-        {
-            e.printStackTrace();
+        if(isConnected) {
+            try
+            {
+                Log.d("[MESSAGE]", topic);
+                client.publish(topic, message.getBytes(),0,false);
+                Toast.makeText(this,"Tu as publié " + message,Toast.LENGTH_SHORT).show();
+            } catch ( MqttException e)
+            {
+                e.printStackTrace();
+            }
         }
     }
 

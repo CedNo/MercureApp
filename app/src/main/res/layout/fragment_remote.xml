@@ -31,13 +31,13 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <Switch
-        android:id="@+id/startVideo"
+        android:id="@+id/startLight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Démarrer la video"
+        android:text="Allumer les lumières"
         app:layout_constraintEnd_toStartOf="@+id/startAutoMode"
-        app:layout_constraintHorizontal_bias="0.215"
+        app:layout_constraintHorizontal_bias="0.285"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TouchTargetSizeCheck" />
@@ -62,7 +62,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/startVideo" />
+        app:layout_constraintTop_toBottomOf="@+id/startLight" />
 
     <Button
         android:id="@+id/btStop"

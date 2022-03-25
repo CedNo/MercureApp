@@ -2,9 +2,7 @@ package com.mercure.app.ui.remote;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -28,7 +26,7 @@ public class RemoteFragment extends Fragment
     Context context;
 
     Button btStop;
-    Switch startAutoMode, startVideo;
+    Switch startAutoMode, startLight;
     VideoView carVideo;
     MainActivity mainActivity;
 
@@ -66,7 +64,7 @@ public class RemoteFragment extends Fragment
 
         btStop        = view.findViewById(R.id.btStop);
         startAutoMode = view.findViewById(R.id.startAutoMode);
-        startVideo    = view.findViewById(R.id.startVideo);
+        startLight    = view.findViewById(R.id.startLight);
         carVideo      = view.findViewById(R.id.carVideo);
 
         startAutoMode.setOnClickListener(new View.OnClickListener()
@@ -84,17 +82,17 @@ public class RemoteFragment extends Fragment
                 }
             }
         });
-        startVideo.setOnClickListener(new View.OnClickListener()
+        startLight.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-                if(startVideo.isChecked())
+                if(startLight.isChecked())
                 {
-
+                    mainActivity.publishing("lumiere", "allume");
                 }
                 else{
-                    carVideo.stopPlayback();
+                    mainActivity.publishing("lumiere", "ferme");
                 }
             }
         });

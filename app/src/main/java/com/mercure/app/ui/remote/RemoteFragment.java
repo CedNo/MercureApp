@@ -26,7 +26,7 @@ public class RemoteFragment extends Fragment
     Context context;
 
     Button btStop;
-    Switch startAutoMode, startLight;
+    Switch startAutoMode, openLum;
     VideoView carVideo;
     MainActivity mainActivity;
 
@@ -64,7 +64,7 @@ public class RemoteFragment extends Fragment
 
         btStop        = view.findViewById(R.id.btStop);
         startAutoMode = view.findViewById(R.id.startAutoMode);
-        startLight    = view.findViewById(R.id.startLight);
+        openLum       = view.findViewById(R.id.openLum);
         carVideo      = view.findViewById(R.id.carVideo);
 
         startAutoMode.setOnClickListener(new View.OnClickListener()
@@ -82,12 +82,12 @@ public class RemoteFragment extends Fragment
                 }
             }
         });
-        startLight.setOnClickListener(new View.OnClickListener()
+        openLum.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-                if(startLight.isChecked())
+                if(openLum.isChecked())
                 {
                     mainActivity.publishing("lumiere", "allume");
                 }

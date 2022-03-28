@@ -31,13 +31,13 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <Switch
-        android:id="@+id/startLight"
+        android:id="@+id/openLum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Allumer les lumières"
+        android:text="Ouvrir les lumières"
         app:layout_constraintEnd_toStartOf="@+id/startAutoMode"
-        app:layout_constraintHorizontal_bias="0.285"
+        app:layout_constraintHorizontal_bias="0.243"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TouchTargetSizeCheck" />
@@ -62,7 +62,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/startLight" />
+        app:layout_constraintTop_toBottomOf="@+id/openLum" />
 
     <Button
         android:id="@+id/btStop"

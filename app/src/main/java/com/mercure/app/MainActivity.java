@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -13,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -44,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements JoystickView.Joys
 
     public static ConstraintLayout frameConnecting;
     public static ConstraintLayout frameConnectionFailed;
+    public static ConstraintLayout frameObstacle;
     ImageView btHomeRefreshConnection;
     private ActivityMainBinding binding;
     Context context;
@@ -54,6 +57,9 @@ public class MainActivity extends AppCompatActivity implements JoystickView.Joys
     public static String address;
     public static Boolean isConnected;
     public static String mouvement;
+
+    Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+    long[] pattern = {400, 400, 400, 400, 400};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,10 +83,14 @@ public class MainActivity extends AppCompatActivity implements JoystickView.Joys
 
         frameConnecting = findViewById(R.id.frameConnecting);
         frameConnectionFailed = findViewById(R.id.frameConnectionFailed);
+        frameObstacle = findViewById(R.id.frameObstacle);
         btHomeRefreshConnection = findViewById(R.id.btHomeRefreshConnection);
         btHomeRefreshConnection.setOnClickListener(this::refreshConnection);
         isConnected = false;
         mouvement = "stop";
+
+        frameObstacle.setVisibility(View.GONE);
+
 
         SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
         String defaultValue = "tcp://172.16.207.54:1883";
@@ -127,6 +137,18 @@ public class MainActivity extends AppCompatActivity implements JoystickView.Joys
                         ((TextView) findViewById(R.id.tvAngleLateral)).setText(txt2);
                         ((ImageView) findViewById(R.id.imgJeepStats)).setRotation(x);
                         break;
+                    }
+                    case "sonar":{
+                        String distance = new String(message.getPayload());
+                        double dist = Double.parseDouble(distance);
+
+                        if (dist < 15 && dist != 0)
+                        {
+                            v.vibrate(pattern, -1);
+                            frameObstacle.setVisibility(View.VISIBLE);
+
+                        }
+                        else frameObstacle.setVisibility(View.GONE);
                     }
                 }
             }
@@ -286,4 +308,11 @@ public class MainActivity extends AppCompatActivity implements JoystickView.Joys
             mouvement = "ard";
         }
     }
+
+
+
+
+
+
+
 }

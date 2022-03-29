@@ -58,13 +58,14 @@ public class MainActivity extends AppCompatActivity implements JoystickView.Joys
     public static Boolean isConnected;
     public static String mouvement;
 
-    Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+    Vibrator v;
     long[] pattern = {400, 400, 400, 400, 400};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         getSupportActionBar().hide();
         context = getApplicationContext();
 

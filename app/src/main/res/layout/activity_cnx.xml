@@ -1,61 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity_Cnx">
+    tools:context=".Activity_Cnx"
+    android:fitsSystemWindows="true">
 
-    <ImageView
-        android:id="@+id/imageViewJeep"
-        android:layout_width="381dp"
-        android:layout_height="224dp"
-        android:src="@drawable/jeep_wrangler"
-        app:layout_constraintBottom_toTopOf="@+id/txtUtilisateur"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewLogo"
-        app:layout_constraintVertical_bias="0.31"
-        tools:srcCompat="@drawable/jeep_wrangler" />
-
-    <EditText
-        android:id="@+id/txtUtilisateur"
+    <ScrollView
+        android:id="@+id/ScrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:background="@drawable/custom_input"
-        android:drawableStart="@drawable/custom_person_ic"
-        android:drawablePadding="12dp"
-        android:ems="10"
-        android:hint="Nom d'utilisateur"
-        android:inputType="textPersonName"
-        android:padding="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.481" />
+        android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/txtMdp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="50dp"
-        android:background="@drawable/custom_input"
-        android:drawableStart="@drawable/custom_lock_ic"
-        android:drawablePadding="12dp"
-        android:ems="10"
-        android:hint="Mot de passe"
-        android:inputType="textPassword"
-        android:padding="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtUtilisateur" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+                android:id="@+id/bt_cnx"
+                android:layout_width="238dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="28dp"
+                android:background="@drawable/gradient_bt"
+                android:text="Connexion"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtMdp" />
+
+            <EditText
+                android:id="@+id/txtMdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="50dp"
+                android:background="@drawable/custom_input"
+                android:drawableStart="@drawable/custom_lock_ic"
+                android:drawablePadding="12dp"
+                android:ems="10"
+                android:hint="Mot de passe"
+                android:inputType="textPassword"
+                android:padding="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.505"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtUtilisateur" />
+
+            <ImageView
+                android:id="@+id/imageViewLogo"
+                android:layout_width="206dp"
+                android:layout_height="73dp"
+                android:src="@drawable/mercure_noir"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/mercure_noir" />
+
+            <ImageView
+                android:id="@+id/imageViewJeep"
+                android:layout_width="381dp"
+                android:layout_height="224dp"
+                android:src="@drawable/jeep_wrangler"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewLogo"
+                tools:srcCompat="@drawable/jeep_wrangler" />
+
+            <EditText
+                android:id="@+id/txtUtilisateur"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="50dp"
+                android:background="@drawable/custom_input"
+                android:drawableStart="@drawable/custom_person_ic"
+                android:drawablePadding="12dp"
+                android:ems="10"
+                android:hint="Nom d'utilisateur"
+                android:inputType="textPersonName"
+                android:padding="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.505"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewJeep" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 
     app:spinning_bar_width="4dp" <!-- Optional -->
@@ -63,27 +94,4 @@
     app:spinning_bar_padding="6dp" <!-- Optional -->
 
 
-    <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
-        android:id="@+id/bt_cnx"
-        android:layout_width="238dp"
-        android:layout_height="40dp"
-        android:background="@drawable/gradient_bt"
-        android:text="Connexion"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtMdp"
-        app:layout_constraintVertical_bias="0.16" />
-
-    <ImageView
-        android:id="@+id/imageViewLogo"
-        android:layout_width="206dp"
-        android:layout_height="73dp"
-        android:src="@drawable/mercure_noir"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/mercure_noir" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

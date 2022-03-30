@@ -72,10 +72,11 @@ public class RemoteFragment extends Fragment
             {
                 if(startAutoMode.isChecked())
                 {
-
+                    mainActivity.publishing("move", "auto");
                 }
                 else {
 
+                    mainActivity.publishing("move", "stop_auto");
                     stop();
                 }
             }
@@ -105,11 +106,6 @@ public class RemoteFragment extends Fragment
 
         MainActivity.frameConnecting.setTranslationZ(45);
         MainActivity.frameConnectionFailed.setTranslationZ(45);
-    }
-
-    private void trajetAuto()
-    {
-
     }
 
     private void stop()

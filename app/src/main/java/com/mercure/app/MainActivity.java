@@ -312,11 +312,4 @@ public class MainActivity extends AppCompatActivity implements JoystickView.Joys
             mouvement = "ard";
         }
     }
-
-
-
-
-
-
-
 }

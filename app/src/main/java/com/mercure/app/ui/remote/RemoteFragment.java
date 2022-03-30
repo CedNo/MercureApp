@@ -27,7 +27,6 @@ public class RemoteFragment extends Fragment
 
     Button btStop;
     Switch startAutoMode, openLum;
-    VideoView carVideo;
     MainActivity mainActivity;
 
     public RemoteFragment()
@@ -65,7 +64,6 @@ public class RemoteFragment extends Fragment
         btStop        = view.findViewById(R.id.btStop);
         startAutoMode = view.findViewById(R.id.startAutoMode);
         openLum       = view.findViewById(R.id.openLum);
-        carVideo      = view.findViewById(R.id.carVideo);
 
         startAutoMode.setOnClickListener(new View.OnClickListener()
         {

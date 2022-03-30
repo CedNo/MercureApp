@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements JoystickView.Joys
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         getSupportActionBar().hide();
         context = getApplicationContext();
 

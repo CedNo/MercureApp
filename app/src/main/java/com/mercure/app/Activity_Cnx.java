@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.Scroller;
 import android.widget.Toast;
+import android.os.Vibrator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -52,6 +53,9 @@ public class Activity_Cnx extends AppCompatActivity {
         txtUtilisateur = findViewById(R.id.txtUtilisateur);
         txtMdp = findViewById(R.id.txtMdp);
         scrollView = findViewById(R.id.ScrollView);
+
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
 
         btn = (CircularProgressButton) findViewById(R.id.bt_cnx);
         Bitmap ic_error = drawableToBitmap(getResources().getDrawable(R.drawable.ic_error));
@@ -92,6 +96,7 @@ public class Activity_Cnx extends AppCompatActivity {
                     public void run() {
                         if(verifChamp(txtUtilisateur.getText().toString().trim(), txtMdp.getText().toString().trim()))
                         {
+                            v.vibrate(400);
                             btn.revertAnimation();
 
                         }

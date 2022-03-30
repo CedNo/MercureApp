@@ -28,6 +28,9 @@ public class RemoteFragment extends Fragment
     Button btStop;
     Switch startAutoMode, openLum;
     MainActivity mainActivity;
+    View joystick;
+    static boolean isONTrajet = false;
+    static boolean isONLum = false;
 
     public RemoteFragment()
     {
@@ -64,6 +67,24 @@ public class RemoteFragment extends Fragment
         btStop        = view.findViewById(R.id.btStop);
         startAutoMode = view.findViewById(R.id.startAutoMode);
         openLum       = view.findViewById(R.id.openLum);
+        joystick      = view.findViewById(R.id.joystick);
+
+        if (isONTrajet == true)
+        {
+            startAutoMode.setChecked(true);
+            joystick.setVisibility(view.INVISIBLE);
+        }
+        else {
+            startAutoMode.setChecked(false);
+            joystick.setVisibility(view.VISIBLE);
+        }
+
+        if (isONLum == true)
+        {
+            openLum.setChecked(true);
+        }
+        else openLum.setChecked(false);
+
 
         startAutoMode.setOnClickListener(new View.OnClickListener()
         {
@@ -72,11 +93,14 @@ public class RemoteFragment extends Fragment
             {
                 if(startAutoMode.isChecked())
                 {
+                    isONTrajet = true;
                     mainActivity.publishing("move", "auto");
+                    joystick.setVisibility(view.INVISIBLE);
                 }
                 else {
-
+                    isONTrajet = false;
                     mainActivity.publishing("move", "stop_auto");
+                    joystick.setVisibility(view.VISIBLE);
                     stop();
                 }
             }
@@ -88,9 +112,11 @@ public class RemoteFragment extends Fragment
             {
                 if(openLum.isChecked())
                 {
+                    isONLum = true;
                     mainActivity.publishing("lumiere", "allume");
                 }
                 else{
+                    isONLum = false;
                     mainActivity.publishing("lumiere", "ferme");
                 }
             }

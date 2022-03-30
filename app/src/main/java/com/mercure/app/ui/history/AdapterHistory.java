@@ -54,6 +54,8 @@ public class AdapterHistory extends RecyclerView.Adapter<AdapterHistory.MonViewH
     int maxVitesseMoy;
     int maxVitesseMax;
 
+    static int colorCounter = 0;
+
     public AdapterHistory(List<Trajet> liste, Context mainContext, HistoryViewModel trajetViewModel, int maxObstacles, int maxDuree, int maxAngleY, int maxAngleX, int maxDistance, int maxVitesseMoy, int maxVitesseMax) {
         this.liste = liste;
         this.mainContext = mainContext;
@@ -116,8 +118,11 @@ public class AdapterHistory extends RecyclerView.Adapter<AdapterHistory.MonViewH
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, MMM dd, yyyy\nHH:mm:ss a");
         String txtDate = dateTrajet.format(formatter);
         String txtDistance = trajet.getDistance() + "m";
-        Random rnd = new Random();
-        int colorBackgroud = colors.get(rnd.nextInt(colors.size()));
+        int colorBackgroud = colors.get(colorCounter);
+        if(colorCounter < colors.size() - 1)
+            colorCounter++;
+        else
+            colorCounter = 0;
 
         holder.tvDate.setText(txtDate);
         holder.tvDistance.setText(txtDistance);
@@ -129,7 +134,6 @@ public class AdapterHistory extends RecyclerView.Adapter<AdapterHistory.MonViewH
             public void onClick(View view) {
                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                 InfosTrajetFragment infosFrag = new InfosTrajetFragment();
-
 
                 Bundle bundle = new Bundle();
                 Trajet trajet = trajetViewModel.getTrajets().getValue().get(pos);
@@ -170,7 +174,7 @@ public class AdapterHistory extends RecyclerView.Adapter<AdapterHistory.MonViewH
     private void initiateColors() {
         colors = new ArrayList<Integer>();
         colors.add(ResourcesCompat.getColor(mainContext.getResources(), R.color.trajets_red1, null));
-        colors.add(ResourcesCompat.getColor(mainContext.getResources(), R.color.trajets_white, null));
         colors.add(ResourcesCompat.getColor(mainContext.getResources(), R.color.trajets_black, null));
+        colors.add(ResourcesCompat.getColor(mainContext.getResources(), R.color.trajets_white, null));
     }
 }

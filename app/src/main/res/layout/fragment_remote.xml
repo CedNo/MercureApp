@@ -7,29 +7,6 @@
     android:background="?colorSecondary"
     tools:context=".ui.remote.RemoteFragment">
 
-    <Button
-        android:id="@+id/btReculer"
-        android:layout_width="92dp"
-        android:layout_height="97dp"
-        android:backgroundTint="@android:color/holo_green_dark"
-        android:elevation="5dp"
-        android:rotation="180"
-        android:visibility="invisible"
-        app:cornerRadius="100dp"
-        app:icon="@drawable/arrow_forward"
-        app:iconGravity="textTop"
-        app:iconSize="70dp"
-        app:iconTint="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/btStop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btAvancer"
-        app:layout_constraintVertical_bias="0.929"
-        app:strokeColor="#040303"
-        app:strokeWidth="2dp"
-        tools:ignore="SpeakableTextPresentCheck" />
-
     <Switch
         android:id="@+id/openLum"
         android:layout_width="wrap_content"
@@ -54,16 +31,6 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TouchTargetSizeCheck" />
 
-    <VideoView
-        android:id="@+id/carVideo"
-        android:layout_width="376dp"
-        android:layout_height="197dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.485"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/openLum" />
-
     <Button
         android:id="@+id/btStop"
         android:layout_width="239dp"
@@ -77,120 +44,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/btAvancer"
-        android:layout_width="97dp"
-        android:layout_height="97dp"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="@android:color/holo_green_dark"
-        android:elevation="5dp"
-        android:visibility="invisible"
-        app:cornerRadius="100dp"
-        app:icon="@drawable/arrow_forward"
-        app:iconGravity="textTop"
-        app:iconSize="70dp"
-        app:iconTint="#000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/carVideo"
-        app:strokeColor="#040303"
-        app:strokeWidth="2dp"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <Button
-        android:id="@+id/btAvDroit"
-        android:layout_width="81dp"
-        android:layout_height="86dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="40dp"
-        android:backgroundTint="@android:color/holo_green_dark"
-        android:elevation="5dp"
-        android:rotation="45"
-        android:visibility="invisible"
-        app:cornerRadius="100dp"
-        app:icon="@drawable/arrow_forward"
-        app:iconGravity="textTop"
-        app:iconSize="55dp"
-        app:iconTint="#000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/carVideo"
-        app:strokeColor="#040303"
-        app:strokeWidth="1.5dp"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <Button
-        android:id="@+id/btAvGauche"
-        android:layout_width="81dp"
-        android:layout_height="86dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="64dp"
-        android:backgroundTint="@android:color/holo_green_dark"
-        android:elevation="5dp"
-        android:rotation="315"
-        android:visibility="invisible"
-        app:cornerRadius="100dp"
-        app:icon="@drawable/arrow_forward"
-        app:iconGravity="textTop"
-        app:iconSize="55dp"
-        app:iconTint="#000000"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/carVideo"
-        app:strokeColor="#040303"
-        app:strokeWidth="1.5dp"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <Button
-        android:id="@+id/btArDroit"
-        android:layout_width="81dp"
-        android:layout_height="86dp"
-        android:layout_marginEnd="40dp"
-        android:backgroundTint="@android:color/holo_green_dark"
-        android:elevation="5dp"
-        android:rotation="135"
-        android:visibility="invisible"
-        app:cornerRadius="100dp"
-        app:icon="@drawable/arrow_forward"
-        app:iconGravity="textTop"
-        app:iconSize="55dp"
-        app:iconTint="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/btStop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btAvDroit"
-        app:layout_constraintVertical_bias="0.238"
-        app:strokeColor="#040303"
-        app:strokeWidth="1.5dp"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <Button
-        android:id="@+id/btArGauche"
-        android:layout_width="81dp"
-        android:layout_height="86dp"
-        android:layout_marginStart="40dp"
-        android:backgroundTint="@android:color/holo_green_dark"
-        android:elevation="5dp"
-        android:rotation="225"
-        android:visibility="invisible"
-        app:cornerRadius="100dp"
-        app:icon="@drawable/arrow_forward"
-        app:iconGravity="textTop"
-        app:iconSize="55dp"
-        app:iconTint="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/btStop"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btAvGauche"
-        app:layout_constraintVertical_bias="0.238"
-        app:strokeColor="#040303"
-        app:strokeWidth="1.5dp"
-        tools:ignore="SpeakableTextPresentCheck" />
-
     <com.mercure.app.ui.remote.JoystickView
         android:id="@+id/joystick"
         android:layout_width="376dp"
         android:layout_height="307dp"
+        android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toTopOf="@+id/btStop"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.542"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/carVideo"
         tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="381dp"
+        android:layout_height="239dp"
+        app:layout_constraintBottom_toTopOf="@+id/joystick"
+        app:layout_constraintTop_toBottomOf="@+id/startAutoMode"
+        tools:layout_editor_absoluteX="18dp"
+        tools:src="@drawable/jeep_wrangler" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

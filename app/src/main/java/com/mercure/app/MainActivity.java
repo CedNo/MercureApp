@@ -114,7 +114,6 @@ public class MainActivity extends AppCompatActivity implements JoystickView.Joys
             public void messageArrived(String topic, MqttMessage message) throws Exception {
                 Log.d("[MESSAGE]", new String(message.getPayload()));
 
-//              TODO FIX L'AFFICHAGE DES ANGLES (INVERSER)
                 switch (topic) {
                     case "accel": {
                         String[] m = new String(message.getPayload()).split("@", 4);
@@ -169,7 +168,6 @@ public class MainActivity extends AppCompatActivity implements JoystickView.Joys
         String message = "the payload";
         try {
             client.publish(topic, message.getBytes(),0,false);
-            Toast.makeText(this,"Published Message",Toast.LENGTH_SHORT).show();
         } catch ( MqttException e) {
             e.printStackTrace();
         }

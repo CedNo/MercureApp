@@ -28,6 +28,8 @@ public class SettingsFragment extends Fragment {
     Context context;
     Button btSave;
     EditText inAdresse;
+    EditText inVitesseDroit;
+    EditText inVitesseTourne;
     LinearLayout layoutSettings;
 
     public SettingsFragment() {
@@ -55,12 +57,20 @@ public class SettingsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         context = view.getContext();
         inAdresse = view.findViewById(R.id.inAdresseIP);
+        inVitesseDroit = view.findViewById(R.id.inVitesseDroit);
+        inVitesseTourne = view.findViewById(R.id.inVitesseTourne);
         btSave = view.findViewById(R.id.btSaveSettings);
         layoutSettings = view.findViewById(R.id.layoutSettings);
 
         btSave.setOnClickListener(this::saveSettings);
 
+        SharedPreferences sharedPref = this.getActivity().getPreferences(Context.MODE_PRIVATE);
+        String vDroit = sharedPref.getString("vitesseDroit", "50");
+        String vTourne = sharedPref.getString("vitesseTourne", "50");
+
         inAdresse.setText(MainActivity.address);
+        inVitesseDroit.setText(vDroit);
+        inVitesseTourne.setText(vTourne);
 
         layoutSettings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,10 +85,14 @@ public class SettingsFragment extends Fragment {
 
     public void saveSettings(View view) {
         String adresse = inAdresse.getText().toString();
+        String vitesseDroit = inVitesseDroit.getText().toString();
+        String vitesseTourne = inVitesseTourne.getText().toString();
 
         SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("adresseMQTT", adresse);
+        editor.putString("vitesseDroit", vitesseDroit);
+        editor.putString("vitesseTourne", vitesseTourne);
         editor.apply();
 
         if(!adresse.equals("")) {
@@ -86,7 +100,7 @@ public class SettingsFragment extends Fragment {
             MainActivity.setAddress(adresse);
         }
 
-        //Navigation.findNavController(view).navigate(R.id.navigation_home);
+        ((MainActivity) getActivity()).publishing("vitesse", vitesseDroit + "@" + vitesseTourne);
         ((MainActivity)getActivity()).connect();
     }
 

@@ -11,31 +11,28 @@
         android:id="@+id/openLum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="16dp"
         android:text="Ouvrir les lumières"
-        app:layout_constraintEnd_toStartOf="@+id/startAutoMode"
-        app:layout_constraintHorizontal_bias="0.243"
+        app:layout_constraintBottom_toTopOf="@+id/joystick"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TouchTargetSizeCheck" />
 
     <Switch
         android:id="@+id/startAutoMode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
         android:text="Trajet autonome"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.904"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/openLum"
         tools:ignore="TouchTargetSizeCheck" />
 
     <Button
         android:id="@+id/btStop"
         android:layout_width="239dp"
         android:layout_height="59dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="28dp"
         android:backgroundTint="@color/main_red"
         android:elevation="5dp"
         android:text="Stop"
@@ -54,14 +51,5 @@
         app:layout_constraintHorizontal_bias="0.542"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
-
-    <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="381dp"
-        android:layout_height="239dp"
-        app:layout_constraintBottom_toTopOf="@+id/joystick"
-        app:layout_constraintTop_toBottomOf="@+id/startAutoMode"
-        tools:layout_editor_absoluteX="18dp"
-        tools:src="@drawable/jeep_wrangler" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

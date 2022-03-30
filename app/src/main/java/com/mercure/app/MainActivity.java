@@ -58,13 +58,14 @@ public class MainActivity extends AppCompatActivity implements JoystickView.Joys
     public static Boolean isConnected;
     public static String mouvement;
 
-    Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+    Vibrator v;
     long[] pattern = {400, 400, 400, 400, 400};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         getSupportActionBar().hide();
         context = getApplicationContext();
 
@@ -91,6 +92,8 @@ public class MainActivity extends AppCompatActivity implements JoystickView.Joys
 
         frameObstacle.setVisibility(View.GONE);
 
+
+        v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
         SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
         String defaultValue = "tcp://172.16.207.54:1883";
@@ -141,6 +144,7 @@ public class MainActivity extends AppCompatActivity implements JoystickView.Joys
                     case "sonar":{
                         String distance = new String(message.getPayload());
                         double dist = Double.parseDouble(distance);
+                        Log.d("test", distance);
 
                         if (dist < 15 && dist != 0)
                         {
@@ -190,6 +194,7 @@ public class MainActivity extends AppCompatActivity implements JoystickView.Joys
         try{
             client.subscribe("accel",0);
             client.subscribe("video",0);
+            client.subscribe("sonar",0);
         }catch (MqttException e){
             e.printStackTrace();
         }
@@ -308,11 +313,4 @@ public class MainActivity extends AppCompatActivity implements JoystickView.Joys
             mouvement = "ard";
         }
     }
-
-
-
-
-
-
-
 }

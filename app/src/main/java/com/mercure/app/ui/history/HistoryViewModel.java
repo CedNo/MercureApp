@@ -1,6 +1,7 @@
 package com.mercure.app.ui.history;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -73,9 +74,6 @@ public class HistoryViewModel extends ViewModel {
                         tdao.ajouterPlusieursTrajets(response.body());
                         trajetsLiveData.postValue(response.body());
                     }
-                    else {
-                        trajetsLiveData.postValue(t);
-                    }
                 }
                 else {
                     tdao.ajouterPlusieursTrajets(response.body());
@@ -86,7 +84,6 @@ public class HistoryViewModel extends ViewModel {
             @Override
             public void onFailure(Call<List<Trajet>> call, Throwable t) {
                 Log.d("[LISTE]", "" + t);
-                // TODO MESSAGE D'ERREUR DE FETCH DES TRAJETS
             }
         });
     }

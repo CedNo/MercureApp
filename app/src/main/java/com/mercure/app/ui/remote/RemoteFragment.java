@@ -1,6 +1,7 @@
 package com.mercure.app.ui.remote;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
@@ -18,6 +20,8 @@ import androidx.lifecycle.ViewModelProvider;
 import com.mercure.app.MainActivity;
 import com.mercure.app.R;
 import com.mercure.app.databinding.FragmentRemoteBinding;
+
+import org.w3c.dom.Text;
 
 public class RemoteFragment extends Fragment
 {
@@ -35,6 +39,9 @@ public class RemoteFragment extends Fragment
 
     SeekBar barVitesseDroite;
     SeekBar barVitesseTourne;
+
+    TextView tvVitesseDroite;
+    TextView tvVitesseTourne;
 
     public RemoteFragment()
     {
@@ -74,15 +81,26 @@ public class RemoteFragment extends Fragment
         joystick      = view.findViewById(R.id.joystick);
         barVitesseTourne = view.findViewById(R.id.barVitesseTourne);
         barVitesseDroite = view.findViewById(R.id.barVitesseDroite);
+        tvVitesseTourne  = view.findViewById(R.id.tvVitesseTourne);
+        tvVitesseDroite  = view.findViewById(R.id.tvVitesseDroite);
+
+        SharedPreferences sharedPref = this.getActivity().getPreferences(Context.MODE_PRIVATE);
+        int vDroit = sharedPref.getInt("vitesseDroit", 45);
+        int vTourne = sharedPref.getInt("vitesseTourne", 50);
+        barVitesseDroite.setProgress(vDroit);
+        barVitesseTourne.setProgress(vTourne);
 
         if (isONTrajet == true)
         {
             startAutoMode.setChecked(true);
             joystick.setVisibility(view.INVISIBLE);
+            setVitesseVisibility(view, false);
         }
         else {
             startAutoMode.setChecked(false);
             joystick.setVisibility(view.VISIBLE);
+            setVitesseVisibility(view, true);
+
         }
 
         if (isONLum == true)
@@ -104,7 +122,7 @@ public class RemoteFragment extends Fragment
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
+                setVitesseSettings();
             }
 
         });
@@ -122,7 +140,7 @@ public class RemoteFragment extends Fragment
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
+                setVitesseSettings();
             }
 
         });
@@ -137,11 +155,13 @@ public class RemoteFragment extends Fragment
                     isONTrajet = true;
                     mainActivity.publishing("move", "auto");
                     joystick.setVisibility(view.INVISIBLE);
+                    setVitesseVisibility(view, false);
                 }
                 else {
                     isONTrajet = false;
                     mainActivity.publishing("move", "stop_auto");
                     joystick.setVisibility(view.VISIBLE);
+                    setVitesseVisibility(view, true);
                     stop();
                 }
             }
@@ -192,5 +212,26 @@ public class RemoteFragment extends Fragment
         int vitesseTourne = barVitesseTourne.getProgress();
         int vitesseDroite = barVitesseDroite.getProgress();
         mainActivity.publishing("move", vitesseDroite + "@" + vitesseTourne);
+    }
+
+    private void setVitesseSettings() {
+        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt("vitesseDroite", barVitesseDroite.getProgress());
+        editor.putInt("vitesseTourne", barVitesseTourne.getProgress());
+        editor.apply();
+    }
+
+    private void setVitesseVisibility(View view, boolean isVisible) {
+        if(isVisible){
+            tvVitesseTourne.setVisibility(view.VISIBLE);
+            barVitesseTourne.setVisibility(view.VISIBLE);
+            barVitesseDroite.setVisibility(view.VISIBLE);
+        }
+        else{
+            tvVitesseTourne.setVisibility(view.INVISIBLE);
+            barVitesseTourne.setVisibility(view.INVISIBLE);
+            barVitesseDroite.setVisibility(view.INVISIBLE);
+        }
     }
 }

@@ -61,10 +61,6 @@ public class SettingsFragment extends Fragment {
 
         btSave.setOnClickListener(this::saveSettings);
 
-        SharedPreferences sharedPref = this.getActivity().getPreferences(Context.MODE_PRIVATE);
-        String vDroit = sharedPref.getString("vitesseDroit", "50");
-        String vTourne = sharedPref.getString("vitesseTourne", "50");
-
         inAdresse.setText(MainActivity.address);
 
         layoutSettings.setOnClickListener(new View.OnClickListener() {

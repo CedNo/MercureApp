@@ -12,11 +12,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="128dp"
         android:text="Ouvrir les lumières"
         android:thumbTint="?colorSecondaryVariant"
-        app:layout_constraintBottom_toTopOf="@+id/tvVitesseDroite"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TouchTargetSizeCheck" />
 
     <Switch
@@ -60,49 +60,49 @@
         android:layout_width="match_parent"
         android:layout_height="28dp"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="8dp"
         android:max="100"
         android:min="30"
         android:progress="45"
         android:progressTint="@color/gauge_grey"
         android:thumbTint="?colorSecondaryVariant"
-        app:layout_constraintBottom_toTopOf="@+id/tvVitesseTourne"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvVitesseDroite" />
 
     <SeekBar
         android:id="@+id/barVitesseTourne"
         android:layout_width="match_parent"
         android:layout_height="28dp"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="8dp"
         android:max="100"
         android:min="30"
         android:progress="50"
         android:progressTint="@color/gauge_grey"
         android:thumbTint="?colorSecondaryVariant"
-        app:layout_constraintBottom_toTopOf="@+id/joystick"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvVitesseTourne" />
 
     <TextView
         android:id="@+id/tvVitesseTourne"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="16dp"
         android:text="Vitesse en tournant"
-        app:layout_constraintBottom_toTopOf="@+id/barVitesseTourne"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/barVitesseDroite" />
 
     <TextView
         android:id="@+id/tvVitesseDroite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="16dp"
         android:text="Vitesse en ligne droite"
-        app:layout_constraintBottom_toTopOf="@+id/barVitesseDroite"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/openLum" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

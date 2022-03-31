@@ -223,17 +223,17 @@ public class RemoteFragment extends Fragment
     }
 
     private void setVitesseVisibility(View view, boolean isVisible) {
-        if(isVisible){
+        if(!isVisible){
             tvVitesseTourne.setVisibility(view.VISIBLE);
             tvVitesseDroite.setVisibility(view.VISIBLE);
             barVitesseTourne.setVisibility(view.VISIBLE);
             barVitesseDroite.setVisibility(view.VISIBLE);
         }
         else{
-            tvVitesseTourne.setVisibility(view.INVISIBLE);
-            tvVitesseDroite.setVisibility(view.INVISIBLE);
-            barVitesseTourne.setVisibility(view.INVISIBLE);
-            barVitesseDroite.setVisibility(view.INVISIBLE);
+            tvVitesseTourne.setVisibility(view.GONE);
+            tvVitesseDroite.setVisibility(view.GONE);
+            barVitesseTourne.setVisibility(view.GONE);
+            barVitesseDroite.setVisibility(view.GONE);
         }
     }
 }

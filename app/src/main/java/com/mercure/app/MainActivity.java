@@ -201,6 +201,7 @@ public class MainActivity extends AppCompatActivity implements JoystickView.Joys
         Log.d("[CONNECTING]", "CALLING MainActivity.connect()...");
         frameConnecting.setVisibility(View.VISIBLE);
         frameConnectionFailed.setVisibility(View.GONE);
+        Log.d("[CONNECTING]", address);
         client = new MqttAndroidClient(context, address, clientId);
         try {
             IMqttToken token = client.connect();

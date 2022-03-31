@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,8 +20,6 @@ import com.mercure.app.MainActivity;
 import com.mercure.app.R;
 import com.mercure.app.databinding.FragmentRemoteBinding;
 
-import org.w3c.dom.Text;
-
 public class RemoteFragment extends Fragment
 {
     private RemoteViewModel remoteViewModel;
@@ -30,7 +27,7 @@ public class RemoteFragment extends Fragment
 
     Context context;
 
-    Button btStop;
+    Button btKlaxon;
     Switch startAutoMode, openLum;
     MainActivity mainActivity;
     View joystick;
@@ -75,7 +72,7 @@ public class RemoteFragment extends Fragment
 
         mainActivity = (MainActivity)getActivity();
 
-        btStop        = view.findViewById(R.id.btStop);
+        btKlaxon        = view.findViewById(R.id.btKlaxon);
         startAutoMode = view.findViewById(R.id.startAutoMode);
         openLum       = view.findViewById(R.id.openLum);
         joystick      = view.findViewById(R.id.joystick);
@@ -94,12 +91,10 @@ public class RemoteFragment extends Fragment
         {
             startAutoMode.setChecked(true);
             joystick.setVisibility(view.INVISIBLE);
-            setVitesseVisibility(view, false);
         }
         else {
             startAutoMode.setChecked(false);
             joystick.setVisibility(view.VISIBLE);
-            setVitesseVisibility(view, true);
 
         }
 
@@ -155,13 +150,11 @@ public class RemoteFragment extends Fragment
                     isONTrajet = true;
                     mainActivity.publishing("move", "auto");
                     joystick.setVisibility(view.INVISIBLE);
-                    setVitesseVisibility(view, false);
                 }
                 else {
                     isONTrajet = false;
                     mainActivity.publishing("move", "stop_auto");
                     joystick.setVisibility(view.VISIBLE);
-                    setVitesseVisibility(view, true);
                     stop();
                 }
             }
@@ -182,12 +175,13 @@ public class RemoteFragment extends Fragment
                 }
             }
         });
-        btStop.setOnClickListener(new View.OnClickListener()
+
+        btKlaxon.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-                stop();
+                mainActivity.publishing("klaxon", "on");
             }
         });
 
@@ -220,20 +214,5 @@ public class RemoteFragment extends Fragment
         editor.putInt("vitesseDroite", barVitesseDroite.getProgress());
         editor.putInt("vitesseTourne", barVitesseTourne.getProgress());
         editor.apply();
-    }
-
-    private void setVitesseVisibility(View view, boolean isVisible) {
-        if(!isVisible){
-            tvVitesseTourne.setVisibility(view.VISIBLE);
-            tvVitesseDroite.setVisibility(view.VISIBLE);
-            barVitesseTourne.setVisibility(view.VISIBLE);
-            barVitesseDroite.setVisibility(view.VISIBLE);
-        }
-        else{
-            tvVitesseTourne.setVisibility(view.GONE);
-            tvVitesseDroite.setVisibility(view.GONE);
-            barVitesseTourne.setVisibility(view.GONE);
-            barVitesseDroite.setVisibility(view.GONE);
-        }
     }
 }

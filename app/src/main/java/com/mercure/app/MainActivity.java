@@ -168,7 +168,6 @@ public class MainActivity extends AppCompatActivity implements JoystickView.Joys
         String message = "the payload";
         try {
             client.publish(topic, message.getBytes(),0,false);
-            Toast.makeText(this,"Published Message",Toast.LENGTH_SHORT).show();
         } catch ( MqttException e) {
             e.printStackTrace();
         }

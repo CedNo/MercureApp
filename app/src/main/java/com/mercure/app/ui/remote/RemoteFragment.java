@@ -231,7 +231,7 @@ public class RemoteFragment extends Fragment
         }
         else{
             tvVitesseTourne.setVisibility(view.INVISIBLE);
-            tvVitesseDroite.setVisibility(view.VISIBLE);
+            tvVitesseDroite.setVisibility(view.INVISIBLE);
             barVitesseTourne.setVisibility(view.INVISIBLE);
             barVitesseDroite.setVisibility(view.INVISIBLE);
         }

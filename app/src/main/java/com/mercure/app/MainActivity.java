@@ -180,7 +180,6 @@ public class MainActivity extends AppCompatActivity implements JoystickView.Joys
             {
                 Log.d("[MESSAGE]", topic);
                 client.publish(topic, message.getBytes(),0,false);
-                Toast.makeText(this,"Tu as publié " + message,Toast.LENGTH_SHORT).show();
             } catch ( MqttException e)
             {
                 e.printStackTrace();

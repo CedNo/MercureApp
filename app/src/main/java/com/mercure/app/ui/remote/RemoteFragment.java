@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.VideoView;
 
@@ -31,6 +32,9 @@ public class RemoteFragment extends Fragment
     View joystick;
     static boolean isONTrajet = false;
     static boolean isONLum = false;
+
+    SeekBar barVitesseDroite;
+    SeekBar barVitesseTourne;
 
     public RemoteFragment()
     {
@@ -68,6 +72,8 @@ public class RemoteFragment extends Fragment
         startAutoMode = view.findViewById(R.id.startAutoMode);
         openLum       = view.findViewById(R.id.openLum);
         joystick      = view.findViewById(R.id.joystick);
+        barVitesseTourne = view.findViewById(R.id.barVitesseTourne);
+        barVitesseDroite = view.findViewById(R.id.barVitesseDroite);
 
         if (isONTrajet == true)
         {
@@ -85,6 +91,41 @@ public class RemoteFragment extends Fragment
         }
         else openLum.setChecked(false);
 
+        barVitesseDroite.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                setVitesse();
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+
+        });
+
+        barVitesseTourne.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                setVitesse();
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+
+        });
 
         startAutoMode.setOnClickListener(new View.OnClickListener()
         {
@@ -144,5 +185,12 @@ public class RemoteFragment extends Fragment
     {
         super.onDestroyView();
         binding = null;
+    }
+
+    private void setVitesse()
+    {
+        int vitesseTourne = barVitesseTourne.getProgress();
+        int vitesseDroite = barVitesseDroite.getProgress();
+        mainActivity.publishing("move", vitesseDroite + "@" + vitesseTourne);
     }
 }

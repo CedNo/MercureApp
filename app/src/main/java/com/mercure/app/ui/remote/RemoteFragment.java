@@ -247,7 +247,7 @@ public class RemoteFragment extends Fragment
 
     private void setTextVitesseDroite(int progress)
     {
-        String sVitesse = "Vitesse en tournant : " + progress;
+        String sVitesse = "Vitesse en ligne droite : " + progress;
         tvVitesseDroite.setText(sVitesse);
     }
 

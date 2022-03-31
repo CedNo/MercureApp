@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="klaxon_array" >
+        <item>BEEP!</item>
+        <item>Star Wars</item>
+        <item>Super Mario</item>
+        <item>Final Countdown</item>
+        <item>Crazy Frog</item>
+        <item>Popcorn Melody</item>
+        <item>Super Mario 2</item>
+        <item>Adventure Time</item>
+    </string-array>
+</resources>

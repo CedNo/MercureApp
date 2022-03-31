@@ -6,8 +6,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -39,6 +42,9 @@ public class RemoteFragment extends Fragment
 
     TextView tvVitesseDroite;
     TextView tvVitesseTourne;
+
+    Spinner spinner;
+    int indexKlaxon = 0;
 
     public RemoteFragment()
     {
@@ -81,11 +87,32 @@ public class RemoteFragment extends Fragment
         tvVitesseTourne  = view.findViewById(R.id.tvVitesseTourne);
         tvVitesseDroite  = view.findViewById(R.id.tvVitesseDroite);
 
+        Spinner spinner = (Spinner) view.findViewById(R.id.spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context,
+                R.array.klaxon_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                indexKlaxon = i;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         SharedPreferences sharedPref = this.getActivity().getPreferences(Context.MODE_PRIVATE);
         int vDroit = sharedPref.getInt("vitesseDroit", 45);
         int vTourne = sharedPref.getInt("vitesseTourne", 50);
         barVitesseDroite.setProgress(vDroit);
+        setTextVitesseDroite(vDroit);
         barVitesseTourne.setProgress(vTourne);
+        setTextVitesseTourne(vTourne);
 
         if (isONTrajet == true)
         {
@@ -107,6 +134,7 @@ public class RemoteFragment extends Fragment
         barVitesseDroite.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                setTextVitesseDroite(progress);
                 setVitesse();
             }
 
@@ -125,6 +153,7 @@ public class RemoteFragment extends Fragment
         barVitesseTourne.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                setTextVitesseTourne(progress);
                 setVitesse();
             }
 
@@ -181,7 +210,7 @@ public class RemoteFragment extends Fragment
             @Override
             public void onClick(View view)
             {
-                mainActivity.publishing("klaxon", "on");
+                mainActivity.publishing("klaxon", indexKlaxon + "");
             }
         });
 
@@ -214,5 +243,17 @@ public class RemoteFragment extends Fragment
         editor.putInt("vitesseDroite", barVitesseDroite.getProgress());
         editor.putInt("vitesseTourne", barVitesseTourne.getProgress());
         editor.apply();
+    }
+
+    private void setTextVitesseDroite(int progress)
+    {
+        String sVitesse = "Vitesse en tournant : " + progress;
+        tvVitesseDroite.setText(sVitesse);
+    }
+
+    private void setTextVitesseTourne(int progress)
+    {
+        String sVitesse = "Vitesse en tournant : " + progress;
+        tvVitesseTourne.setText(sVitesse);
     }
 }

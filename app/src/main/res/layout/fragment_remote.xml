@@ -30,26 +30,13 @@
         app:layout_constraintTop_toTopOf="@+id/openLum"
         tools:ignore="TouchTargetSizeCheck" />
 
-    <Button
-        android:id="@+id/btKlaxon"
-        android:layout_width="252dp"
-        android:layout_height="59dp"
-        android:layout_marginBottom="8dp"
-        android:backgroundTint="@color/main_red"
-        android:elevation="5dp"
-        android:text="POUTTE POUTTE"
-        app:cornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <com.mercure.app.ui.remote.JoystickView
         android:id="@+id/joystick"
         android:layout_width="252dp"
         android:layout_height="252dp"
         android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/btKlaxon"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
@@ -103,5 +90,35 @@
         android:text="Vitesse en ligne droite"
         app:layout_constraintBottom_toTopOf="@+id/barVitesseDroite"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/btKlaxon"
+            android:layout_width="54dp"
+            android:layout_height="64dp"
+            android:backgroundTint="@color/main_red"
+            android:drawableLeft="@drawable/ic_klaxon"
+            android:elevation="5dp"
+            app:cornerRadius="10dp"
+            app:layout_constraintEnd_toStartOf="@+id/spinner"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/btKlaxon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

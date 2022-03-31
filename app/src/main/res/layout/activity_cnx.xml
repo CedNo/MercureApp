@@ -4,15 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity_Cnx"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    tools:context=".Activity_Cnx">
 
     <ScrollView
-        android:id="@+id/ScrollView"
+        android:id="@+id/scConnexion"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutConnexion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 

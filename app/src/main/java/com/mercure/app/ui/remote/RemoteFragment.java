@@ -107,7 +107,7 @@ public class RemoteFragment extends Fragment
         });
 
         SharedPreferences sharedPref = this.getActivity().getPreferences(Context.MODE_PRIVATE);
-        int vDroit = sharedPref.getInt("vitesseDroit", 45);
+        int vDroit = sharedPref.getInt("vitesseDroite", 45);
         int vTourne = sharedPref.getInt("vitesseTourne", 50);
         barVitesseDroite.setProgress(vDroit);
         setTextVitesseDroite(vDroit);

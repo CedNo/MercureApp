@@ -11,10 +11,11 @@
         android:id="@+id/openLum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
         android:text="Ouvrir les lumières"
-        app:layout_constraintBottom_toTopOf="@+id/joystick"
+        android:thumbTint="?colorSecondaryVariant"
+        app:layout_constraintBottom_toTopOf="@+id/tvVitesseDroite"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="TouchTargetSizeCheck" />
 
@@ -22,34 +23,102 @@
         android:id="@+id/startAutoMode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="16dp"
+        android:layout_marginEnd="16dp"
         android:text="Trajet autonome"
+        android:thumbTint="?colorSecondaryVariant"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/openLum"
         tools:ignore="TouchTargetSizeCheck" />
 
-    <Button
-        android:id="@+id/btStop"
-        android:layout_width="239dp"
-        android:layout_height="59dp"
-        android:layout_marginBottom="28dp"
-        android:backgroundTint="@color/main_red"
-        android:elevation="5dp"
-        android:text="Stop"
-        app:cornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <com.mercure.app.ui.remote.JoystickView
+        android:id="@+id/joystick"
+        android:layout_width="252dp"
+        android:layout_height="252dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <SeekBar
+        android:id="@+id/barVitesseDroite"
+        android:layout_width="match_parent"
+        android:layout_height="28dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="8dp"
+        android:max="100"
+        android:min="30"
+        android:progress="45"
+        android:progressTint="@color/gauge_grey"
+        android:thumbTint="?colorSecondaryVariant"
+        app:layout_constraintBottom_toTopOf="@+id/tvVitesseTourne"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <com.mercure.app.ui.remote.JoystickView
-        android:id="@+id/joystick"
-        android:layout_width="376dp"
-        android:layout_height="307dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/btStop"
+    <SeekBar
+        android:id="@+id/barVitesseTourne"
+        android:layout_width="match_parent"
+        android:layout_height="28dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp"
+        android:max="100"
+        android:min="30"
+        android:progress="50"
+        android:progressTint="@color/gauge_grey"
+        android:thumbTint="?colorSecondaryVariant"
+        app:layout_constraintBottom_toTopOf="@+id/joystick"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.542"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tvVitesseTourne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="Vitesse en tournant"
+        app:layout_constraintBottom_toTopOf="@+id/barVitesseTourne"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tvVitesseDroite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="Vitesse en ligne droite"
+        app:layout_constraintBottom_toTopOf="@+id/barVitesseDroite"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/btKlaxon"
+            android:layout_width="54dp"
+            android:layout_height="64dp"
+            android:backgroundTint="@color/main_red"
+            android:drawableLeft="@drawable/ic_klaxon"
+            android:elevation="5dp"
+            app:cornerRadius="10dp"
+            app:layout_constraintEnd_toStartOf="@+id/spinner"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/btKlaxon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

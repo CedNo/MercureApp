@@ -1,5 +1,6 @@
 package com.mercure.app;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -10,18 +11,18 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
-import android.widget.Scroller;
 import android.widget.Toast;
 import android.os.Vibrator;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.solver.widgets.ConstraintAnchor;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.util.Iterator;
 import java.util.List;
@@ -43,7 +44,7 @@ public class Activity_Cnx extends AppCompatActivity {
     Context context;
     EditText txtUtilisateur, txtMdp;
     ScrollView scrollView;
-
+    ConstraintLayout layoutConnexion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +53,14 @@ public class Activity_Cnx extends AppCompatActivity {
         int transparent = Color.TRANSPARENT;
         txtUtilisateur = findViewById(R.id.txtUtilisateur);
         txtMdp = findViewById(R.id.txtMdp);
-        scrollView = findViewById(R.id.ScrollView);
+        scrollView = findViewById(R.id.scConnexion);
+        layoutConnexion = findViewById(R.id.layoutConnexion);
+        layoutConnexion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideSoftKeyboard(Activity_Cnx.this);
+            }
+        });
 
         Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
@@ -67,9 +75,6 @@ public class Activity_Cnx extends AppCompatActivity {
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
-
-
-
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,7 +85,6 @@ public class Activity_Cnx extends AppCompatActivity {
                 txtUtilisateur.setBackgroundResource(R.drawable.custom_input);
                 txtMdp.setBackgroundResource(R.drawable.custom_input);
 
-
                 //Ferme le clavier quand on appuit sur le bouton cnx
                 InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
                 inputMethodManager.hideSoftInputFromWindow(view.getApplicationWindowToken(),0);
@@ -88,7 +92,6 @@ public class Activity_Cnx extends AppCompatActivity {
                 //Unfocus les edittext
                 txtUtilisateur.clearFocus();
                 txtMdp.clearFocus();
-
 
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
@@ -114,30 +117,13 @@ public class Activity_Cnx extends AppCompatActivity {
                                     finish();
                                 }
                             }, 2000);
-
-
                         }
                     }
                 }, 2000);
-
-
             }
         });
-
-
-
             //scrollView.scrollTo(0, (int) btn.getY());
-
-
     }
-
-
-
-
-
-
-
-
 
 // Methode qui converti un drawable en bitmap
     public static Bitmap drawableToBitmap(Drawable drawable) {
@@ -220,8 +206,6 @@ public class Activity_Cnx extends AppCompatActivity {
                 Log.d("error", t.getMessage());
             }
         });
-
-
     }
 
 
@@ -242,7 +226,6 @@ public class Activity_Cnx extends AppCompatActivity {
         }
 
         return boolUser;
-
     }
 
     public boolean verifMdp(String mdp)
@@ -262,11 +245,8 @@ public class Activity_Cnx extends AppCompatActivity {
 
         }
 
-
         return boolMdp;
     }
-
-
 
     public static String encryptThisString(String input)
     {
@@ -300,9 +280,15 @@ public class Activity_Cnx extends AppCompatActivity {
         }
     }
 
-
-
-
-
-
+    public static void hideSoftKeyboard(Activity activity) {
+        InputMethodManager inputMethodManager =
+                (InputMethodManager) activity.getSystemService(
+                        Activity.INPUT_METHOD_SERVICE);
+        if(inputMethodManager.isAcceptingText()){
+            inputMethodManager.hideSoftInputFromWindow(
+                    activity.getCurrentFocus().getWindowToken(),
+                    0
+            );
+        }
+    }
 }

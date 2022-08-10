@@ -35,9 +35,9 @@ public class Database {
 
         if (con == null) {
             try {
-                String host = "jdbc:mysql://184.162.255.173:23306/mercure";
-                String username = "mercure";
-                String password = "P4AarR!c?D";
+                String host = "";
+                String username = "";
+                String password = "";
                 con = DriverManager.getConnection(host, username, password);
 
             } catch (SQLException ex) {
